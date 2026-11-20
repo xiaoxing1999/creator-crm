@@ -1,13 +1,1 @@
-{
-  "crons": [
-    {
-      "path": "/api/discover",
-      "schedule": "0 13 * * *"
-    }
-  ],
-  "functions": {
-    "app/api/discover/route.ts": {
-      "maxDuration": 300
-    }
-  }
-}
+{}
