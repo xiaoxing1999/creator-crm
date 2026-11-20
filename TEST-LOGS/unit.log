@@ -1,0 +1,20 @@
+✔ public/hub/hub-cjk.ttf 覆盖界面中的全部中文字符 (6.959458ms)
+✔ public/hub/hub-cjk-bold.ttf 覆盖界面中的全部中文字符 (4.26711ms)
+(node:4048) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///vercel/share/v0-project/lib/hub.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /vercel/share/v0-project/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ 预算：未知、明确零、有限小数与非法数值 (1.694315ms)
+✔ 预算：千分位逗号可解析，非法逗号格式拒绝 (0.297701ms)
+✔ 批量入围：只移动当前 ASIN 的已发现候选，其他保持不变 (1.725386ms)
+✔ 阶段移动：同列放下不写历史，收藏不受影响 (0.270406ms)
+✔ 编号 0：家装达人不能高匹配皮划艇鱼竿支架 (0.288362ms)
+✔ 所有商品：高匹配必须同类目，结果有界且不依赖任意身份编号 (1.192149ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 109.167398

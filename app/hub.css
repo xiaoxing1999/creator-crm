@@ -1071,6 +1071,71 @@
 .night .directory tr:hover {
   background: var(--bg);
 }
+.kanbancard {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+.hub .kanbancard .kanban {
+  margin-bottom: 0;
+}
+.hub .kanbancard select {
+  font-size: 12px;
+  padding: 3px 6px;
+  color: var(--sub);
+}
+.hub .badge {
+  display: inline-flex;
+  min-width: 18px;
+  justify-content: center;
+  border-radius: 9px;
+  padding: 0 5px;
+  font-size: 11px;
+  background: var(--blue);
+  color: var(--paper);
+}
+.bulk > span {
+  display: flex;
+  flex-direction: column;
+  margin-right: auto;
+}
+.bulk > span small {
+  color: var(--sub);
+  font-size: 12px;
+}
+.night .user > span,
+.night .topavatar button {
+  background: var(--tint) !important;
+  border-color: var(--line) !important;
+  color: var(--ink) !important;
+}
+.night .tone1 .metriclabel svg {
+  color: #c4b5fd;
+  background: #2e2a4a;
+}
+.night .tone2 .metriclabel svg,
+.night .ev0 {
+  color: #7dd9b4;
+  background: #173a30;
+}
+.night .tone3 .metriclabel svg,
+.night .ev1 {
+  color: #f5c071;
+  background: #3d2f17;
+}
+.night .late {
+  color: #f5a27a;
+}
+.night .platform.Instagram svg {
+  color: #f08cc4;
+}
+.night .platform.Facebook svg {
+  color: #8cb2ff;
+}
+.night .platform.Pinterest svg {
+  color: #f5838e;
+}
 @media (min-width: 1350px) {
   .rail {
     width: 234px;

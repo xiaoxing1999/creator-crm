@@ -94,6 +94,40 @@ test("收藏不改阶段，批量入围同步看板，拖放及键盘调整", as
   await close(p);
   await expect(card(col("已回复"))).toBeVisible();
 });
+test("切换 ASIN 清空选择，批量入围只作用于当前 ASIN", async ({ page: p }) => {
+  const stageOf = (name) =>
+    p.locator("tbody tr").filter({ hasText: name }).locator("td").last();
+  await p.getByLabel("选择 Ethan Brooks").check();
+  await expect(p.locator(".bulk")).toContainText("已选 1 人");
+  await btn(p, "切换商品").click();
+  await p.getByRole("button", { name: /皮划艇可调鱼竿支架/ }).click();
+  await expect(p.locator(".bulk")).toHaveCount(0);
+  await p.getByLabel("选择 Ethan Brooks").check();
+  await expect(btn(p, "批量入围")).toBeDisabled();
+  await btn(p, "切换商品").click();
+  await p.getByRole("button", { name: /20V 无刷充电电钻套装/ }).click();
+  await expect(p.locator(".bulk")).toHaveCount(0);
+  await p.getByLabel("选择 Ethan Brooks").check();
+  await p.getByLabel("选择 Maya Chen").check();
+  await expect(p.locator(".bulk")).toContainText("可入围 1 人");
+  await btn(p, "批量入围").click();
+  await expect(stageOf("Ethan Brooks")).toHaveText("已入围");
+  await expect(stageOf("Maya Chen")).toHaveText("已入围");
+  await expect(btn(p, "收藏 Ethan Brooks")).toHaveAttribute("aria-pressed", "false");
+});
+test("跨页面保留发现筛选与看板筛选，看板阶段选择器可用", async ({ page: p }) => {
+  await p.getByLabel("搜索创作者").fill("ethan");
+  await btn(p, "合作管线").click();
+  await p.getByLabel("平台").selectOption("YouTube");
+  await p.getByLabel("调整 Ethan Brooks 的阶段").selectOption("已联系");
+  const col = p.locator(".board section").filter({ has: p.locator("h3", { hasText: "已联系" }) });
+  await expect(col.locator(".kanban", { hasText: "Ethan Brooks" })).toBeVisible();
+  await btn(p, "创作者发现").click();
+  await expect(p.getByLabel("搜索创作者")).toHaveValue("ethan");
+  await expect(row(p).locator("td").last()).toHaveText("已联系");
+  await btn(p, "合作管线").click();
+  await expect(p.getByLabel("平台")).toHaveValue("YouTube");
+});
 test("预算、备注与日期：取消离开、确认丢弃、保存与再次打开", async ({
   page: p,
 }) => {

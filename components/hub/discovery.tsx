@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Search,
   Bookmark,
@@ -39,9 +39,12 @@ import {
   score,
   highMatch,
   compact,
+  shortlist,
+  shortlistable,
 } from "@/lib/hub";
 import { Select, Face, Platform, Evidence, Modal } from "./shared";
 export type Changed = (ids: number[], patch: Partial<Creator>) => void;
+export type Apply = (fn: (rows: Creator[]) => Creator[]) => void;
 export function ProductBanner({
   product,
   change,
@@ -134,6 +137,9 @@ export function Discovery({
   open,
   savedOnly = false,
   notify,
+  apply,
+  memory = {},
+  memoryKey = "discovery",
 }: {
   rows: Creator[];
   p: number;
@@ -141,17 +147,39 @@ export function Discovery({
   open: (c: Creator) => void;
   savedOnly?: boolean;
   notify: (s: string) => void;
+  apply?: Apply;
+  memory?: Record<string, unknown>;
+  memoryKey?: string;
 }) {
-  const [f, F] = useState(empty),
+  const kept = (memory[memoryKey] ?? {}) as Partial<{
+    f: typeof empty;
+    q: string;
+    sort: string;
+    cards: boolean;
+    page: number;
+    tab: string;
+  }>;
+  const [f, F] = useState(kept.f ?? empty),
     [draft, setDraft] = useState(empty),
-    [q, Q] = useState(""),
-    [sort, S] = useState("匹配分优先"),
-    [cards, C] = useState(false),
-    [ids, I] = useState<number[]>([]),
+    [q, Q] = useState(kept.q ?? ""),
+    [sort, S] = useState(kept.sort ?? "匹配分优先"),
+    [cards, C] = useState(kept.cards ?? false),
+    [selection, setSelection] = useState({ p, ids: [] as number[] }),
     [modal, M] = useState(""),
-    [page, P] = useState(0),
-    [tab, T] = useState(savedOnly ? "已收藏" : "全部创作者"),
+    [page, P] = useState(kept.page ?? 0),
+    [tab, T] = useState(kept.tab ?? (savedOnly ? "已收藏" : "全部创作者")),
     [campaign, K] = useState("新品首发");
+  useEffect(() => {
+    memory[memoryKey] = { f, q, sort, cards, page, tab };
+  }, [memory, memoryKey, f, q, sort, cards, page, tab]);
+  const ids =
+    selection.p === p
+      ? selection.ids.filter((id) => rows.some((c) => c.id === id))
+      : [];
+  const I = (next: number[]) => setSelection({ p, ids: next });
+  const eligible = rows.filter(
+    (c) => ids.includes(c.id) && shortlistable(c, p),
+  ).length;
   const change = (k: keyof typeof empty, v: string) => {
     F({ ...f, [k]: v });
     P(0);
@@ -298,7 +326,8 @@ export function Discovery({
           }}
         >
           <SlidersHorizontal />
-          筛选{filterCount || ""}
+          筛选
+          {filterCount > 0 && <span className="badge">{filterCount}</span>}
         </button>
         <label className="sort">
           <ArrowUpDown />
@@ -314,20 +343,29 @@ export function Discovery({
         </label>
       </div>
       {ids.length > 0 && (
-        <div className="bulk">
-          已选 {ids.length} 人
+        <div className="bulk" role="region" aria-label="批量操作">
+          <span>
+            已选 {ids.length} 人
+            <small>
+              {products[p].asin} 可入围 {eligible} 人
+              {ids.length - eligible > 0 &&
+                ` · ${ids.length - eligible} 人非已发现或属于其他 ASIN，将保持不变`}
+            </small>
+          </span>
           <button
+            disabled={!eligible}
             onClick={() => {
-              ids.forEach((id) => {
-                const c = rows.find((r) => r.id === id)!;
-                if (c.stage === stages[0])
-                  update([id], {
-                    stage: stages[1],
-                    history: [...c.history, "阶段变更：已入围"],
-                  });
-              });
+              const result = shortlist(rows, ids, p);
+              if (apply) apply((r) => shortlist(r, ids, p).rows);
+              else
+                result.moved.forEach((id) =>
+                  update([id], { stage: stages[1], product: p }),
+                );
               I([]);
-              notify("已将所选的已发现创作者移至已入围，其他阶段不变");
+              notify(
+                `已将 ${result.moved.length} 位 ${products[p].asin} 候选移至已入围` +
+                  (result.skipped ? `，${result.skipped} 位保持不变` : ""),
+              );
             }}
           >
             <Bookmark />
@@ -386,7 +424,10 @@ export function Discovery({
                 <input
                   type="checkbox"
                   aria-label="选择当前页"
-                  checked={visible.every((c) => ids.includes(c.id))}
+                  checked={
+                    visible.length > 0 &&
+                    visible.every((c) => ids.includes(c.id))
+                  }
                   onChange={(e) =>
                     I(
                       e.target.checked

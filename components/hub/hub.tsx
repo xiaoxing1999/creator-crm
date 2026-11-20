@@ -110,10 +110,11 @@ export function Hub() {
     if (time.current) clearTimeout(time.current);
     time.current = setTimeout(() => T(""), 2600);
   };
+  const apply = (fn: (rows: Creator[]) => Creator[]) =>
+    S((old) => old.map((r, i) => (i === work ? fn(r) : r)));
   const update = (ids: number[], patch: Partial<Creator>) =>
-    S((old) =>
-      old.map((r, i) => (i === work ? service.update(r, ids, patch) : r)),
-    );
+    apply((r) => service.update(r, ids, patch));
+  const memory = useRef<Record<string, unknown>>({});
   const go = (v: number, s = false, nextWork = work) =>
     guard(() => {
       W(nextWork);
@@ -335,13 +336,22 @@ export function Hub() {
                 rows={data}
                 p={p}
                 update={update}
+                apply={apply}
                 open={open}
                 notify={notify}
                 savedOnly={savedOnly}
+                memory={memory.current}
+                memoryKey={view + "-" + work + "-" + savedOnly}
               />
             </>
           ) : view === 4 ? (
-            <Pipeline rows={data} open={open} update={update} />
+            <Pipeline
+              rows={data}
+              open={open}
+              apply={apply}
+              memory={memory.current}
+              memoryKey={"pipeline-" + work}
+            />
           ) : view === 8 ? (
             <section className="panel pad">
               <h2>模拟环境</h2>

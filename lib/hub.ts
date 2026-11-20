@@ -105,8 +105,11 @@ export const score = (c: Creator, p: number) =>
 export const highMatch = (c: Creator, p: number) =>
   c.niche === niches[products[p].niche] && score(c, p) >= 80;
 export function parseBudget(raw: string): number | null {
-  if (!raw.trim()) return null;
-  const value = Number(raw);
+  const text = raw.trim();
+  if (!text) return null;
+  const value = Number(
+    /^\d{1,3}(,\d{3})+(\.\d+)?$/.test(text) ? text.replace(/,/g, "") : text,
+  );
   if (!Number.isFinite(value) || value < 0)
     throw new RangeError("预算必须是非负有限数值");
   return value;
@@ -116,8 +119,41 @@ export const compact = (n: number) =>
     notation: "compact",
     maximumFractionDigits: 1,
   }).format(n);
+export const shortlistable = (c: Creator, p: number) =>
+  c.stage === stages[0] && (c.product === p || c.product === -1);
+export function shortlist(rows: Creator[], ids: number[], p: number) {
+  const moved = rows
+    .filter((c) => ids.includes(c.id) && shortlistable(c, p))
+    .map((c) => c.id);
+  return {
+    moved,
+    skipped: ids.filter((id) => rows.some((c) => c.id === id)).length -
+      moved.length,
+    rows: rows.map((c) =>
+      moved.includes(c.id)
+        ? {
+            ...c,
+            stage: stages[1],
+            product: p,
+            history: [
+              ...c.history,
+              `阶段变更：已入围（${products[p].asin}）`,
+            ],
+          }
+        : c,
+    ),
+  };
+}
+export const moveStage = (rows: Creator[], id: number, stage: string) =>
+  rows.map((c) =>
+    c.id === id && c.stage !== stage
+      ? { ...c, stage, history: [...c.history, "阶段变更：" + stage] }
+      : c,
+  );
 export const service = {
   list: seed,
   update: (rows: Creator[], ids: number[], patch: Partial<Creator>) =>
     rows.map((c) => (ids.includes(c.id) ? { ...c, ...patch } : c)),
+  shortlist,
+  moveStage,
 };
