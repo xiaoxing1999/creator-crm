@@ -1,0 +1,9 @@
+dev server http://localhost:3000 @ 81ebff6
+/ 200
+/api/discover 404
+/api/apify 404
+/api/avatar 404
+/campaigns 404
+/creators 404
+/pipeline 404
+/login 404

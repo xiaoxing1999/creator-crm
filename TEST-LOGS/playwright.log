@@ -1,14 +1,15 @@
 
-Running 9 tests using 1 worker
+Running 11 tests using 1 worker
 
-  ✓  1 tests/hub.spec.mjs:32:1 › 搜索、排序、商品与高匹配 (3.3s)
-  ✓  2 tests/hub.spec.mjs:46:1 › 高级条件应用、取消、Esc、重置与无效范围 (1.5s)
-  ✓  3 tests/hub.spec.mjs:71:1 › 收藏不改阶段，批量入围同步看板，拖放及键盘调整 (1.8s)
-  ✓  4 tests/hub.spec.mjs:97:1 › 切换 ASIN 清空选择，批量入围只作用于当前 ASIN (1.6s)
-  ✓  5 tests/hub.spec.mjs:118:1 › 跨页面保留发现筛选与看板筛选，看板阶段选择器可用 (1.1s)
-  ✓  6 tests/hub.spec.mjs:131:1 › 预算、备注与日期：取消离开、确认丢弃、保存与再次打开 (1.9s)
-  ✓  7 tests/hub.spec.mjs:166:1 › 完整档案切页、工作区取消和移动导航 (2.0s)
-  ✓  8 tests/hub.spec.mjs:189:1 › 两个工作区的同 ID 记录隔离，三种服务状态 (1.6s)
-  ✓  9 tests/hub.spec.mjs:220:1 › 焦点、双快捷键、四种宽度与路由隔离 (1.7s)
-
-  9 passed (17.7s)
+[1/11] tests/hub.spec.mjs:32:1 › 搜索、排序、商品与高匹配
+[2/11] tests/hub.spec.mjs:46:1 › 高级条件应用、取消、Esc、重置与无效范围
+[3/11] tests/hub.spec.mjs:71:1 › 收藏不改阶段，批量入围同步看板，拖放及键盘调整
+[4/11] tests/hub.spec.mjs:97:1 › 切换 ASIN 清空选择，批量入围只作用于当前 ASIN
+[5/11] tests/hub.spec.mjs:118:1 › A→B→A 切换 ASIN 后旧选择不复活，批量操作不会作用于隐藏选择
+[6/11] tests/hub.spec.mjs:132:1 › 批量加入活动：跳过其他 ASIN，不改变阶段
+[7/11] tests/hub.spec.mjs:151:1 › 跨页面保留发现筛选与看板筛选，看板阶段选择器可用
+[8/11] tests/hub.spec.mjs:164:1 › 预算、备注与日期：取消离开、确认丢弃、保存与再次打开
+[9/11] tests/hub.spec.mjs:209:1 › 完整档案切页、工作区取消和移动导航
+[10/11] tests/hub.spec.mjs:232:1 › 两个工作区的同 ID 记录隔离，三种服务状态
+[11/11] tests/hub.spec.mjs:263:1 › 焦点、双快捷键、四种宽度与路由隔离
+  11 passed (13.5s)

@@ -16,7 +16,34 @@
 | `tests/hub.test.mjs` | +3：严格预算格式与上限；批量加入活动范围与原因；两种批量操作范围判定一致。 |
 | `tests/hub.spec.mjs` | +2 场景（A→B→A、批量加入活动），预算场景扩充。 |
 
-验证（本轮）：`tsc --noEmit` 0 错误；`node --test --experimental-strip-types tests/hub.test.mjs tests/glyphs.test.mjs` 11 / 11 通过；Playwright 11 / 11 通过（见 `E2E-RESULTS.md`）。本轮未重跑生产构建与截图。
+验证（本轮，提交 81ebff6，Node v24.16.0 / npm 11.13.0；日志见 `TEST-LOGS/`）：
+
+| 检查 | 结果 |
+| --- | --- |
+| 隔离工作树 `npm ci`（`env -i`，无 .env） | 退出 0 |
+| 隔离工作树 `npm run build` | 退出 0，路由只有 `/` 与 `/_not-found` |
+| `tsc --noEmit` | 退出 0 |
+| `node --test --experimental-strip-types tests/hub.test.mjs tests/glyphs.test.mjs` | 11 / 11 通过 |
+| Playwright | 11 / 11 通过（含 A→B→A、跨商品加入活动、预算格式、筛选与草稿保护） |
+| 旧 CRM 路由（dev 服务器 curl） | `/api/discover`、`/api/apify`、`/api/avatar`、`/campaigns`、`/creators`、`/pipeline`、`/login` 均 404 |
+| 外网请求 | Playwright fixture 拦截非本源请求并断言为空；深色截图脚本同样记录为空 |
+| 截图 | 1440/1024/768/390 与三张深色主题均已重拍并人工查看 |
+
+本文件仅为开发自检记录，不构成独立审核签字。
+
+## P1 架构问题（交给 Codex，本轮不实现）
+
+1. **同步调用不能直接换成 API。** `discovery.tsx`、`pipeline.tsx`、`profile.tsx` 现在同步调用 `service.shortlist` / `moveStage` / `applyBulk`，然后立刻写入本地状态。只把 `service` 换成 fetch 不够。后端需要异步 Repository + UseCase 层，前端要处理 pending / 失败回滚 / 冲突提示。
+2. **写操作必须有版本检查与幂等。** 每条合作记录带 `version`（乐观锁），批量操作带客户端生成的 `Idempotency-Key`。服务端按 `planBulk` 的同一规则重新判定 ASIN 范围，并返回 changed / skipped 明细。不能信任前端的计划结果。
+3. **金额。** 前端 `parseBudgetCents` 只做输入校验。生产环境用 `numeric(12,2)` 或整数分 `bigint` 存储，服务端用 Decimal 或整数分计算，不用 JS Number 作为最终财务值。
+4. **生产数据模型拆分**（不要在 v0 封版中开发）：
+   - `Identity`（真人）1—N `SocialAccount`（平台账号、粉丝等快照）
+   - `Product`（ASIN）
+   - `Collaboration`（Identity × Product × Workspace，阶段、预算、负责人、版本号）：一个真人可以有多个 ASIN 合作
+   - `Evidence`（关联 Collaboration 或 SocialAccount）
+   - `Event`（只追加的操作历史）
+   - `Bookmark`（用户 × Identity 收藏，与合作阶段独立）
+5. 加入推广活动不等于入围；收藏不改变阶段。两条规则在后端 UseCase 中也必须保持。
 
 ## 上一轮改动清单（a532e4d → 564b96b）
 
@@ -47,7 +74,7 @@
 
 ## 已知限制 / 交给 Codex
 
-1. 状态只存在客户端内存，刷新会丢失；`lib/hub.ts` 的 `service` 是唯一替换点，接入独立系统的后端时保持函数签名即可。
+1. 状态只存在客户端内存，刷新会丢失。`lib/hub.ts` 的 `service` 集中了业务规则，但它是同步接口，接入后端时需要按上文"P1 架构问题"改为异步 UseCase，不能只替换函数实现。
 2. 深色主题是应用内开关，未跟随系统设置，也未持久化。
 3. 未保存草稿保护覆盖档案内的预算、备注和日期：应用内切页、关闭档案时会确认，刷新或关闭标签由 `beforeunload` 提示；草稿本身不持久化。
 4. 匹配分规则（同类目且 ≥ 80 才算高匹配）是演示规则，真实评分需由后端提供。

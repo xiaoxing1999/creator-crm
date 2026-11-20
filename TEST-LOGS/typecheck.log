@@ -1,10 +1,1 @@
-npm timing npm:load:whichnode Completed in 1ms
-npm timing npm:load:configload Completed in 5ms
-npm timing config:load:flatten Completed in 2ms
-npm timing npm:load:mkdirpcache Completed in 0ms
-npm timing npm:load:mkdirplogs Completed in 0ms
-npm timing npm:load:setTitle Completed in 0ms
-npm timing npm:load Completed in 21ms
-npm timing command:exec Completed in 1703ms
-npm timing npm Completed in 1856ms
-tsc exit 0
+exit=0

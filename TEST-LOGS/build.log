@@ -1,5 +1,22 @@
+HEAD=81ebff6dcd8678e1c7f4bb72eb8710fc4477b4eb
+node=v24.16.0 npm=11.13.0
+.env.example
 
-added 135 packages in 6s
+added 135 packages, and audited 136 packages in 9s
+
+17 packages are looking for funding
+  run `npm fund` for details
+
+14 vulnerabilities (9 moderate, 4 high, 1 critical)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+npm ci exit=0
 
 > creator-crm@0.1.0 build
 > next build
@@ -7,15 +24,15 @@ added 135 packages in 6s
 ▲ Next.js 16.2.4 (Turbopack)
 
   Creating an optimized production build ...
-✓ Compiled successfully in 2.4s
+✓ Compiled successfully in 1978ms
   Running TypeScript ...
-  Finished TypeScript in 4.0s ...
+  Finished TypeScript in 3.6s ...
   Collecting page data using 3 workers ...
   Generating static pages using 3 workers (0/4) ...
   Generating static pages using 3 workers (1/4) 
   Generating static pages using 3 workers (2/4) 
   Generating static pages using 3 workers (3/4) 
-✓ Generating static pages using 3 workers (4/4) in 162ms
+✓ Generating static pages using 3 workers (4/4) in 152ms
   Finalizing page optimization ...
 
 Route (app)
@@ -25,3 +42,4 @@ Route (app)
 
 ○  (Static)  prerendered as static content
 
+build exit=0
