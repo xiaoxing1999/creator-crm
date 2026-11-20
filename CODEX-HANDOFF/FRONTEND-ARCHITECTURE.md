@@ -19,7 +19,7 @@
 | `components/hub/*.tsx` | Hub 视图组件 | 生效 |
 | `lib/hub.ts` | Mock 数据、领域规则、`service` 门面 | 生效 |
 | `public/hub/*` | 头像、商品图、CJK 字体子集（OFL） | 生效 |
-| `tests/hub.test.mjs`、`tests/hub.spec.mjs` | 单元与 Playwright 测试 | 生效 |
+| `tests/hub.test.mjs`、`tests/glyphs.test.mjs`、`tests/hub.spec.mjs` | 领域单元、字体覆盖、Playwright 测试 | 生效 |
 | `scripts/hub-font-subset.py` | 重新生成 CJK 字体子集 | 工具 |
 | `app/page.tsx`、`app/layout.tsx`、`app/api/*`、`app/{campaigns,candidates,creators,login,outreach,pipeline}`、`components/{sidebar,avatar,activity-icon}.tsx`、`components/ui/*`、`lib/{ai-scoring,apify-client,outreach-prompt,...}.ts`、`lib/db/*`、`drizzle.config.ts`、`scripts/seed-from-csv.ts` | 旧版 creator-crm（Neon + Drizzle + Anthropic + Resend + Apify） | **不可路由、不在原型中执行**，仅作参考保留 |
 

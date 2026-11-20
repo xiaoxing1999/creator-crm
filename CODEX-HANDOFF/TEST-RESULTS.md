@@ -6,7 +6,7 @@
 | --- | --- | --- | --- |
 | 干净构建 | 新 worktree，`env -i` 空环境：`npm ci` + `next build` | **PASS**（`npm_ci_exit=0`、`build_exit=0`，路由 `/`、`/_not-found`） | `build.log` |
 | 类型检查 | `npx tsc --noEmit` | **PASS**（exit 0，无诊断） | `typecheck.log` |
-| 单元测试 | `node --test tests/hub.test.mjs` | **PASS 11 / 11** | `unit.log` |
+| 单元测试 | `node --test tests/hub.test.mjs tests/glyphs.test.mjs` | **PASS 11 / 11**（领域 9 + 字体 2） | `unit.log` |
 | Playwright E2E | `npx playwright test tests/hub.spec.mjs`（Chromium，dev server :3000） | **PASS 11 / 11**（16.5s） | `playwright.log` |
 | 路由隔离 | curl dev server | `/` 200；`/api/discover`、`/api/apify/webhook`、`/api/avatar`、`/creators`、`/pipeline`、`/login` 均 404 | `routes.log` |
 | 依赖审计 | `npm audit --json` | 14 项（1 critical、4 high、9 moderate），详见 `SECURITY-AUDIT.md` | `npm-audit.json`、`npm-audit.txt` |
@@ -22,9 +22,9 @@
 
 ## 用例覆盖
 
-单元（`tests/hub.test.mjs`）：预算严格解析与上限；批量加入活动不改阶段 / 收藏并记录原因；
-两种批量动作 ASIN 范围一致；同列放下不写历史；跨类目不得高匹配；所有商品高匹配同类目；
-CJK 字体子集无缺字等。
+单元（`tests/hub.test.mjs`，9 个）：预算严格解析与上限；批量加入活动不改阶段 / 收藏并记录原因；
+两种批量动作 ASIN 范围一致；同列放下不写历史；跨类目不得高匹配；所有商品高匹配同类目。
+字体（`tests/glyphs.test.mjs`，2 个）：常规与粗体 CJK 子集覆盖界面全部中文字符。
 
 E2E（`tests/hub.spec.mjs`）：收藏不改阶段 + 批量入围同步看板 + 拖放与键盘；切换 ASIN
 清空选择；A→B→A 旧选择不复活；批量加入活动跳过其他 ASIN；跨页面保留筛选；预算 / 备注 /

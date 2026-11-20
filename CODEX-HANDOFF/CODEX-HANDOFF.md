@@ -29,7 +29,7 @@ npm run dev                          # 打开 http://localhost:3000
 
 ```bash
 npx tsc --noEmit
-node --test tests/hub.test.mjs
+node --test tests/hub.test.mjs tests/glyphs.test.mjs   # 11 个
 npx playwright install chromium      # 首次
 npm run dev &                        # 另开终端亦可
 npx playwright test tests/hub.spec.mjs
