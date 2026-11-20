@@ -1,4 +1,8 @@
-# Creator CRM
+# Amazon US Creator Hub · 独立模拟原型
+
+本分支默认运行纯内存原型。使用 `npm ci`、`npm run build`、`npm run dev`；不要配置数据库、运行迁移、执行发现脚本或发送邮件。刷新会重置会话。原型范围与来源见 [交接文档](HUB-HANDOFF.md)，审核结果见 [修复报告](BUGFIX-REPORT.md)。
+
+## 历史 Creator CRM 模板（以下说明不适用于本分支原型）
 
 An open, self-hostable **creator / influencer CRM** for running an outreach program end to end — discover creators, score them for fit, manage a pipeline, draft and send outreach, and track every interaction. Built on **Next.js 16 + Postgres + Drizzle ORM** and deploys to Vercel in a few minutes.
 

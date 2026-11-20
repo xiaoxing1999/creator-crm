@@ -1126,12 +1126,14 @@
   .hub .rail {
     position: fixed;
     left: -250px;
+    visibility: hidden;
     top: 0;
     width: 210px;
     z-index: 9;
     transition: left 0.15s;
   }
-  .mobileopen .rail {
+  .hub.mobileopen .rail {
+    visibility: visible;
     left: 0;
   }
   .mobileopen .scrim {

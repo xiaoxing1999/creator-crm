@@ -93,7 +93,9 @@ export function Pipeline({
                     </small>
                     <p>{c.next}</p>
                     <small>
-                      {c.campaign || "单次合作"} · ${c.budget} · {c.operator}
+                      {c.campaign || "单次合作"} ·{" "}
+                      {c.budget === null ? "预算未知" : `$${c.budget}`} ·{" "}
+                      {c.operator}
                     </small>
                     <span
                       className={

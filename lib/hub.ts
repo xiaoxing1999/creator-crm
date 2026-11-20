@@ -83,7 +83,7 @@ export function seed() {
     campaign: id % 7 === 0 ? "新品首发" : "",
     operator: ["林晓", "Alex", "Mia"][id % 3],
     note: "",
-    budget: 200 + id * 25,
+    budget: (200 + id * 25) as number | null,
     due: id % 4 === 0 ? "2026-11-17" : "2026-11-25",
     next: "复核商品与受众证据",
     sample: "未寄送",
@@ -95,13 +95,22 @@ export function seed() {
 export type Creator = ReturnType<typeof seed>[number];
 export const today = "2026-11-19";
 export const factors = (c: Creator, p: number) => [
-  c.niche === niches[products[p].niche] ? 40 : Math.max(12, 36 - (c.id % 18)),
+  c.niche === niches[products[p].niche] ? 40 : 0,
   [25, 20, 14, 7][c.us],
   Math.max(4, 20 - Math.floor(c.days / 2)),
   [13, 12, 8, 5][c.affiliate],
 ];
 export const score = (c: Creator, p: number) =>
   factors(c, p).reduce((a, b) => a + b, 0);
+export const highMatch = (c: Creator, p: number) =>
+  c.niche === niches[products[p].niche] && score(c, p) >= 80;
+export function parseBudget(raw: string): number | null {
+  if (!raw.trim()) return null;
+  const value = Number(raw);
+  if (!Number.isFinite(value) || value < 0)
+    throw new RangeError("预算必须是非负有限数值");
+  return value;
+}
 export const compact = (n: number) =>
   Intl.NumberFormat("en-US", {
     notation: "compact",

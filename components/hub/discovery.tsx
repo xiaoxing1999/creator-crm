@@ -37,6 +37,7 @@ import {
   stages,
   evidence,
   score,
+  highMatch,
   compact,
 } from "@/lib/hub";
 import { Select, Face, Platform, Evidence, Modal } from "./shared";
@@ -83,8 +84,8 @@ export function Stats({ rows, p }: { rows: Creator[]; p: number }) {
     [
       ScanSearch,
       "高匹配创作者",
-      rows.filter((c) => score(c, p) >= 80).length,
-      "匹配分 ≥ 80",
+      rows.filter((c) => highMatch(c, p)).length,
+      "同类目且 ≥ 80 · 非资格认证",
     ],
     [
       ShieldCheck,
@@ -92,7 +93,7 @@ export function Stats({ rows, p }: { rows: Creator[]; p: number }) {
       rows.filter((c) => c.affiliate < 2).length,
       "模拟证据",
     ],
-    [Bookmark, "已入围名单", rows.filter((c) => c.saved).length, "已收藏"],
+    [Bookmark, "收藏名单", rows.filter((c) => c.saved).length, "已收藏"],
   ] as const;
   return (
     <div className="metrics">
@@ -142,28 +143,35 @@ export function Discovery({
   notify: (s: string) => void;
 }) {
   const [f, F] = useState(empty),
+    [draft, setDraft] = useState(empty),
     [q, Q] = useState(""),
     [sort, S] = useState("匹配分优先"),
     [cards, C] = useState(false),
     [ids, I] = useState<number[]>([]),
     [modal, M] = useState(""),
     [page, P] = useState(0),
-    [tab, T] = useState(savedOnly ? "已入围" : "全部创作者"),
+    [tab, T] = useState(savedOnly ? "已收藏" : "全部创作者"),
     [campaign, K] = useState("新品首发");
   const change = (k: keyof typeof empty, v: string) => {
     F({ ...f, [k]: v });
     P(0);
     I([]);
   };
-  const invalid = !!f.max && +f.min > +f.max;
+  const invalidDraft =
+    [draft.min, draft.max, draft.views, draft.er, draft.days, draft.fit].some(
+      (value) => !Number.isFinite(Number(value)) || +value < 0,
+    ) ||
+    (!!draft.max && +draft.min > +draft.max) ||
+    +draft.fit > 100 ||
+    +draft.er > 100;
   const filterCount = Object.keys(f).filter(
     (k) => f[k as keyof typeof f] !== empty[k as keyof typeof f],
   ).length;
   const result = rows
     .filter(
       (c) =>
-        (tab !== "已入围" || c.saved) &&
-        (tab !== "高匹配" || score(c, p) >= 80) &&
+        (tab !== "已收藏" || c.saved) &&
+        (tab !== "高匹配" || highMatch(c, p)) &&
         [c.name, c.handle, c.niche]
           .join(" ")
           .toLowerCase()
@@ -204,11 +212,8 @@ export function Discovery({
     />
   );
   const save = (c: Creator) => {
-    update([c.id], {
-      saved: !c.saved,
-      ...(!c.saved && c.stage === stages[0] ? { stage: stages[1] } : {}),
-    });
-    notify(c.saved ? "已移出入围名单" : "已加入入围名单");
+    update([c.id], { saved: !c.saved });
+    notify(c.saved ? "已取消收藏" : "已收藏（不改变合作阶段）");
   };
   const reset = () => {
     F(empty);
@@ -216,12 +221,12 @@ export function Discovery({
     P(0);
     I([]);
   };
-  const selectors = (k: keyof typeof empty, opts: string[]) => (
+  const selectors = (k: keyof typeof empty, opts: string[], staged = false) => (
     <Select
       label={empty[k]}
-      value={f[k]}
+      value={(staged ? draft : f)[k]}
       options={[empty[k], ...opts]}
-      onChange={(v) => change(k, v)}
+      onChange={(v) => (staged ? setDraft({ ...draft, [k]: v }) : change(k, v))}
     />
   );
   return (
@@ -252,7 +257,7 @@ export function Discovery({
         </div>
       </div>
       <div className="tabs">
-        {["全部创作者", "高匹配", "已入围"].map((t, i) => {
+        {["全部创作者", "高匹配", "已收藏"].map((t, i) => {
           const Icon = [Users, Star, Bookmark][i];
           return (
             <button
@@ -286,7 +291,12 @@ export function Discovery({
         </label>
         {selectors("platform", platforms)}
         {selectors("niche", niches)}
-        <button onClick={() => M("筛选条件")}>
+        <button
+          onClick={() => {
+            setDraft(f);
+            M("筛选条件");
+          }}
+        >
           <SlidersHorizontal />
           筛选{filterCount || ""}
         </button>
@@ -310,13 +320,14 @@ export function Discovery({
             onClick={() => {
               ids.forEach((id) => {
                 const c = rows.find((r) => r.id === id)!;
-                update([id], {
-                  saved: true,
-                  ...(c.stage === stages[0] ? { stage: stages[1] } : {}),
-                });
+                if (c.stage === stages[0])
+                  update([id], {
+                    stage: stages[1],
+                    history: [...c.history, "阶段变更：已入围"],
+                  });
               });
               I([]);
-              notify("已更新入围名单");
+              notify("已将所选的已发现创作者移至已入围，其他阶段不变");
             }}
           >
             <Bookmark />
@@ -328,10 +339,10 @@ export function Discovery({
           </button>
         </div>
       )}
-      {invalid || !result.length ? (
+      {!result.length ? (
         <div className="empty">
           <Filter />
-          <h3>{invalid ? "粉丝数范围无效" : "没有符合条件的创作者"}</h3>
+          <h3>没有符合条件的创作者</h3>
           <button onClick={reset}>重置筛选</button>
         </div>
       ) : cards ? (
@@ -342,7 +353,8 @@ export function Discovery({
                 {pick(c)}
                 <button
                   className="icon"
-                  aria-label="切换入围状态"
+                  aria-label={"收藏 " + c.name}
+                  aria-pressed={c.saved}
                   onClick={() => save(c)}
                 >
                   <Bookmark fill={c.saved ? "currentColor" : "none"} />
@@ -436,7 +448,8 @@ export function Discovery({
                 </TableCell>
                 <TableCell>
                   <button
-                    aria-label={(c.saved ? "取消入围 " : "加入入围 ") + c.name}
+                    aria-label={"收藏 " + c.name}
+                    aria-pressed={c.saved}
                     className={"icon " + (c.saved ? "saved" : "")}
                     onClick={() => save(c)}
                   >
@@ -494,7 +507,7 @@ export function Discovery({
                 ).map(([k, opts]) => (
                   <label key={k}>
                     {empty[k].slice(2)}
-                    {selectors(k, opts)}
+                    {selectors(k, opts, true)}
                   </label>
                 ))}
                 {(
@@ -512,22 +525,40 @@ export function Discovery({
                     <input
                       type="number"
                       min="0"
-                      value={f[k]}
-                      onChange={(e) => change(k, e.target.value)}
+                      value={draft[k]}
+                      onChange={(e) =>
+                        setDraft({ ...draft, [k]: e.target.value })
+                      }
                       placeholder="不限"
                     />
                   </label>
                 ))}
               </div>
-              {invalid && <p role="alert">最高粉丝数不能小于最低值。</p>}
+              {invalidDraft && (
+                <p role="alert">
+                  请输入有效的非负范围；分数和百分比不得超过 100。
+                </p>
+              )}
               <div className="split">
-                <button onClick={reset}>重置</button>
+                <button
+                  onClick={() =>
+                    setDraft({ ...empty, platform: f.platform, niche: f.niche })
+                  }
+                >
+                  重置高级条件
+                </button>
+                <button onClick={() => M("")}>取消</button>
                 <button
                   className="primary"
-                  disabled={invalid}
-                  onClick={() => M("")}
+                  disabled={invalidDraft}
+                  onClick={() => {
+                    F(draft);
+                    I([]);
+                    P(0);
+                    M("");
+                  }}
                 >
-                  查看 {result.length} 个结果
+                  应用筛选
                 </button>
               </div>
             </>

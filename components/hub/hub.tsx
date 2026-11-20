@@ -71,7 +71,7 @@ const english = [
 const desc = [
   "查看当前商品的创作者覆盖与待跟进合作。",
   "围绕目标商品发现创作者，通过证据与数据评估合作潜力。",
-  "查看创作者档案，管理入围名单与合作记录。",
+  "查看创作者档案，管理收藏名单与合作记录。",
   "选择模拟商品，查看创作者的匹配理由。",
   "从首次发现到内容发布，在同一看板推进合作。",
   "核对内容披露、商品链接与交付进度。",
@@ -94,6 +94,12 @@ export function Hub() {
     [sim, E] = useState("正常"),
     [dark, D] = useState(false),
     [savedOnly, Y] = useState(false);
+  const [dirty, setDirty] = useState(false);
+  const [pending, setPending] = useState<(() => void) | null>(null);
+  const guard = (action: () => void) => {
+    if (dirty) setPending(() => action);
+    else action();
+  };
   const time = useRef<ReturnType<typeof setTimeout> | null>(null);
   const rows = sets[work],
     data = sim === "无创作者" ? [] : rows,
@@ -108,22 +114,27 @@ export function Hub() {
     S((old) =>
       old.map((r, i) => (i === work ? service.update(r, ids, patch) : r)),
     );
-  const go = (v: number, s = false) => {
-    V(v);
-    H(false);
-    A(null);
-    M("");
-    B(false);
-    Y(s);
-  };
-  const open = (r: Creator) => {
-    A(r.id);
-    M("档案速览");
-  };
+  const go = (v: number, s = false, nextWork = work) =>
+    guard(() => {
+      W(nextWork);
+      V(v);
+      H(false);
+      A(null);
+      M("");
+      B(false);
+      Y(s);
+    });
+  const open = (r: Creator) =>
+    guard(() => {
+      H(false);
+      A(r.id);
+      M("档案速览");
+    });
   useEffect(() => {
     const fn = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
+        if (document.querySelector("dialog[open]")) return;
         Q("");
         M("全局搜索");
       }
@@ -247,6 +258,7 @@ export function Hub() {
           <div className="row">
             <button
               className="global"
+              aria-label="全局搜索"
               onClick={() => {
                 Q("");
                 M("全局搜索");
@@ -282,7 +294,7 @@ export function Hub() {
             {view === 1 && !full && (
               <button className="primary" onClick={() => go(2, true)}>
                 <Bookmark />
-                入围名单<span>{rows.filter((x) => x.saved).length}</span>
+                收藏名单<span>{data.filter((x) => x.saved).length}</span>
               </button>
             )}
             {full && <button onClick={() => go(1)}>返回发现</button>}
@@ -300,7 +312,15 @@ export function Hub() {
             </div>
           ) : full && c ? (
             <div className="panel pad">
-              <Profile c={c} p={p} update={update} notify={notify} />
+              <Profile
+                key={c.id}
+                onDirty={setDirty}
+                guard={guard}
+                c={c}
+                p={p}
+                update={update}
+                notify={notify}
+              />
             </div>
           ) : view === 1 || view === 2 ? (
             <>
@@ -397,12 +417,14 @@ export function Hub() {
                 <section className="panel pad">
                   <h2>活动归因概览</h2>
                   <p>
-                    预计合作预算：$
+                    已填写的合作预算小计：$
                     {data
                       .filter((r) => r.campaign)
-                      .reduce((s, r) => s + r.budget, 0)
+                      .reduce((s, r) => s + (r.budget ?? 0), 0)
                       .toLocaleString()}
-                    。此金额为估算，不是实际支出。
+                    ；另有{" "}
+                    {data.filter((r) => r.campaign && r.budget === null).length}{" "}
+                    条预算未知。此金额为估算，不是实际支出。
                   </p>
                   <p>
                     已确认销售、归因点击与实际付款：暂无数据，无法计算 ROI。
@@ -432,7 +454,12 @@ export function Hub() {
         </main>
       </div>
       {modal && (
-        <Modal title={modal} close={() => M("")} side={modal === "档案速览"}>
+        <Modal
+          key={modal}
+          title={modal}
+          close={() => (modal === "档案速览" ? guard(() => M("")) : M(""))}
+          side={modal === "档案速览"}
+        >
           {modal === "档案速览" && c ? (
             <Profile
               key={c.id}
@@ -440,10 +467,14 @@ export function Hub() {
               p={p}
               update={update}
               notify={notify}
-              expand={() => {
-                H(true);
-                M("");
-              }}
+              onDirty={setDirty}
+              guard={guard}
+              expand={() =>
+                guard(() => {
+                  H(true);
+                  M("");
+                })
+              }
             />
           ) : modal === "选择目标商品" ? (
             products.map((x, i) => (
@@ -468,7 +499,7 @@ export function Hub() {
               <label className="search">
                 <Search />
                 <input
-                  autoFocus
+                  data-initial-focus
                   aria-label="全局搜索关键词"
                   value={q}
                   onChange={(e) => Q(e.target.value)}
@@ -508,8 +539,7 @@ export function Hub() {
                 key={w}
                 className="productrow"
                 onClick={() => {
-                  W(i);
-                  go(1);
+                  go(1, false, i);
                 }}
               >
                 <Building2 />
@@ -524,6 +554,24 @@ export function Hub() {
               <button onClick={() => go(8)}>工作区设置</button>
             </>
           )}
+        </Modal>
+      )}
+      {pending && (
+        <Modal title="放弃未保存的草稿？" close={() => setPending(null)}>
+          <p>备注、日期、预算或跟进事项仍有未保存的修改。</p>
+          <div className="row">
+            <button data-initial-focus onClick={() => setPending(null)}>
+              继续编辑
+            </button>
+            <button
+              onClick={() => {
+                setPending(null);
+                pending();
+              }}
+            >
+              放弃修改
+            </button>
+          </div>
         </Modal>
       )}
       {toast && (

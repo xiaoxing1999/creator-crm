@@ -85,15 +85,35 @@ export function Modal({
   const ref = useRef<HTMLDialogElement>(null);
   useEffect(() => {
     const d = ref.current!;
+    const trigger = document.activeElement;
     d.showModal();
-    return () => d.close();
+    d.querySelector<HTMLElement>("[data-initial-focus]")?.focus();
+    return () => {
+      d.close();
+      if (trigger instanceof HTMLElement && trigger.isConnected)
+        trigger.focus({ preventScroll: true });
+    };
   }, []);
   return (
     <dialog
       ref={ref}
       className={side ? "drawer" : ""}
       aria-label={title}
-      onCancel={close}
+      onKeyDown={(event) => {
+        if (
+          event.key === "Escape" &&
+          !event.nativeEvent.isComposing &&
+          event.keyCode !== 229
+        ) {
+          event.preventDefault();
+          event.stopPropagation();
+          close();
+        }
+      }}
+      onCancel={(event) => {
+        event.preventDefault();
+        close();
+      }}
       onClick={(e) => {
         if (e.target === ref.current) close();
       }}

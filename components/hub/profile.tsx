@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Bookmark,
   MapPin,
@@ -16,10 +16,19 @@ import {
   factors,
   score,
   compact,
+  parseBudget,
 } from "@/lib/hub";
 import { Face, Evidence, Platform, Select } from "./shared";
 import type { Changed } from "./discovery";
+const formValues = (c: Creator) => ({
+  note: c.note,
+  due: c.due,
+  deliverable: c.deliverable,
+  budget: c.budget?.toString() ?? "",
+});
 export function Profile({
+  onDirty,
+  guard,
   c,
   p,
   update,
@@ -27,14 +36,32 @@ export function Profile({
   expand,
 }: {
   c: Creator;
+  onDirty: (dirty: boolean) => void;
+  guard: (action: () => void) => void;
   p: number;
   update: Changed;
   notify: (s: string) => void;
   expand?: () => void;
 }) {
   const [tab, T] = useState("概览"),
-    [draft, D] = useState({ ...c }),
-    [follow, F] = useState("");
+    [draft, D] = useState(() => formValues(c)),
+    [follow, F] = useState(""),
+    [error, setError] = useState("");
+  const dirty =
+    JSON.stringify(draft) !== JSON.stringify(formValues(c)) || follow !== "";
+  useEffect(() => {
+    onDirty(dirty);
+    if (!dirty) return;
+    const warn = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = "";
+    };
+    window.addEventListener("beforeunload", warn);
+    return () => {
+      onDirty(false);
+      window.removeEventListener("beforeunload", warn);
+    };
+  }, [dirty, onDirty]);
   const patch = (x: Partial<Creator>) => update([c.id], x);
   return (
     <div className="profile">
@@ -53,15 +80,9 @@ export function Profile({
         </div>
         <button
           className={"icon " + (c.saved ? "saved" : "")}
-          aria-label="切换入围"
-          onClick={() =>
-            patch({
-              saved: !c.saved,
-              ...(!c.saved && c.stage === stages[0]
-                ? { stage: stages[1] }
-                : {}),
-            })
-          }
+          aria-label="收藏"
+          aria-pressed={c.saved}
+          onClick={() => patch({ saved: !c.saved })}
         >
           <Bookmark fill={c.saved ? "currentColor" : "none"} />
         </button>
@@ -232,10 +253,11 @@ export function Profile({
             <label>
               预计预算（USD）
               <input
-                type="number"
-                min="0"
+                type="text"
+                inputMode="decimal"
+                placeholder="未知（未填写）"
                 value={draft.budget}
-                onChange={(e) => D({ ...draft, budget: +e.target.value })}
+                onChange={(e) => D({ ...draft, budget: e.target.value })}
               />
             </label>
             <label>
@@ -264,22 +286,45 @@ export function Profile({
           <button
             className="primary"
             onClick={() => {
-              if (draft.budget < 0 || !draft.due || !draft.deliverable.trim()) {
-                notify("保存失败：请检查预算、日期和交付内容");
+              let budget: number | null;
+              try {
+                budget = parseBudget(draft.budget);
+              } catch {
+                setError("保存失败：预算必须是非负有限数值");
+                return;
+              }
+              if (!draft.due || !draft.deliverable.trim()) {
+                setError("保存失败：请检查日期和交付内容");
                 return;
               }
               patch({
                 note: draft.note,
-                budget: draft.budget,
+                budget,
                 due: draft.due,
                 deliverable: draft.deliverable,
                 history: [...c.history, "更新合作资料"],
               });
+              setError("");
+              D({ ...draft, budget: budget?.toString() ?? "" });
               notify("合作资料已保存");
             }}
           >
             保存合作资料
           </button>
+          {error && <p role="alert">{error}</p>}
+          {dirty && (
+            <button
+              onClick={() =>
+                guard(() => {
+                  setError("");
+                  D(formValues(c));
+                  F("");
+                })
+              }
+            >
+              放弃草稿
+            </button>
+          )}
           <h3>下一步：{c.next}</h3>
           <label>
             添加跟进事项
