@@ -1,0 +1,359 @@
+npm timing npm:load:whichnode Completed in 1ms
+npm timing npm:load:configload Completed in 5ms
+npm timing config:load:flatten Completed in 2ms
+npm timing npm:load:mkdirpcache Completed in 1ms
+npm timing npm:load:mkdirplogs Completed in 0ms
+npm timing npm:load:setTitle Completed in 0ms
+npm timing npm:load Completed in 21ms
+npm timing arborist:ctor Completed in 0ms
+npm timing auditReport:getReport Completed in 112ms
+npm timing metavuln:cache:get:security-advisory:esbuild:mmDbmXeify80UdRagFfITBhG3xHP4llbx8MchwTjBL3g0WFb/cK8N40wL0tjqR9NE2gMLzj7SHOX2g2NoW8+ew== Completed in 21ms
+npm timing metavuln:cache:get:security-advisory:baseline-browser-mapping:19CNVb4Xa9j8tskjmac2L3l7Ab8xNBmfPNTfjbdzQA2Q1D6ZL2kqioPmLUNIiNnwlnmMHjIIXRjGBqxQig7fxQ== Completed in 21ms
+npm timing metavuln:cache:get:security-advisory:nanoid:G4d3k7GgtTq4GBrwzQ8/x7W0iUhlZxJRv8ECCIxQ8EljG7i12UNClh6yRGwC76MzFuAF5klybdArzm40c5m6pg== Completed in 20ms
+npm timing metavuln:cache:get:security-advisory:csv-parse:U5xRWZ3/PFTVKgLEDCQByFDuTM8ZbpkvNpNsUccRjklseL6qNa+NabTZtBa438ISaN9grY5r0D9tom7AOApvgA== Completed in 22ms
+npm timing metavuln:cache:get:security-advisory:esbuild:jKdCIzePj7J1488qgRXvF8Srh9wutSuR1exB8YooNX62hT+qhtrUXYbArLNoIhgwbaCqKpmduh18syZU7BR9SA== Completed in 25ms
+npm timing metavuln:cache:get:security-advisory:next:shsZqSRWFViwiw/BIH8ExMy/LnlTjSzXl+UqdHUmbq4HzUlQwInlkckWYCbCR0Kxay0ibg7NUkinY7Ezis86wA== Completed in 22ms
+npm timing metavuln:cache:get:security-advisory:next:Qcf6QokT/n5N0WGj71+hiHzef8ko/yagT0HKKbEEvu6KJ5aHNLR3n7uNGL5I7LD/Db3C76/3idh1ABPaH7Kbjw== Completed in 22ms
+npm timing metavuln:cache:get:security-advisory:nanoid:r+z+JMwVfhGHAr/0YAy6/3RrDzRoIYQ2AZVHMg9UDR0NJ2m9fi3DGObNE6EPq2ciL/QAojxEu2QsJ0Zzdynclg== Completed in 22ms
+npm timing metavuln:cache:get:security-advisory:next:8eoHYMMqhsx7igEHojVVbzO/A9dqMYVxObQGfU/E1vUx4cTg91Nkp+uKYBt+8b4r3XCDeOYD5ls14Lo25WmOCg== Completed in 23ms
+npm timing metavuln:cache:get:security-advisory:next:54YdPnQLtipSqeqeZwVT5aVX8++0QYOQkaVasYHiMDXfLbBidEEZWAAacG72a7uZcrlHDUA+8x2pHTqWBur6OQ== Completed in 23ms
+npm timing metavuln:cache:get:security-advisory:next:6yD398HnoDvdtz/buuny/U3KsuNeY6JHp6lg2Gd3VOiUsMbkvkm91Ca8l8tQgv2y5qCRjLVpWMDRFsg8J4CIXQ== Completed in 23ms
+npm timing metavuln:cache:get:security-advisory:next:e8PNqbKk0CLBKVKLA6WZuSLMo/oZjN48nDpacNbukhsL5PIRCPhGxnujoWKLfxjaTkx9rJADNL47deTYw6WFvg== Completed in 23ms
+npm timing metavuln:cache:get:security-advisory:next:zgN9/0FbnXNWI4Kgzc3jNUtPqOQTXmBLniJK1Hy5FktOvIrA1J8hoIlaSiKACfJwZ8z3GBexITKV6t3yNoAhlw== Completed in 24ms
+npm timing metavuln:cache:get:security-advisory:next:ZebzSStjgG3iBrtGrROz0f7RV5i2IHSDMSohD43aIslggHbLcPVFkBrPtfL9JIfL3NYr+xB4t5VjMl0geLA1rA== Completed in 24ms
+npm timing metavuln:cache:get:security-advisory:next:HdUpzAjcQB9rdv2m/22kY+FJHuMTtjPLlwSi2yfCt+9aOtoPuHuiJrYR76ZVaPYWw8/s4I8lUAc3zJ6ueV6cwA== Completed in 25ms
+npm timing metavuln:cache:get:security-advisory:next:tRy+f8506lE/lgydlyszyzvyShrD5T7QW+CNHZXA2hoFdb0YQpZm4HRg0NX4fwjR0rLahZXjMi1R6uBSHcJDBg== Completed in 26ms
+npm timing metavuln:cache:get:security-advisory:next:MJRrgXLZon3Z0d/st4ZzVJJu8Ic8HCSBeqY/37iUFLRlK3RX5vOsMH5ljSMLMvcBlv1GcSiuu3pe/Ax8b2GWWQ== Completed in 27ms
+npm timing metavuln:cache:get:security-advisory:next:i0/6IUyX6jyANJyC4WTnJWdAl3jWQvKVefjwD35zQtXD1cKExNmceRe/T1fhdlG+o7Qw8PY0D2zrj6w9bth7pA== Completed in 27ms
+npm timing metavuln:cache:get:security-advisory:next:PFJOGmmCl6Qyvbu55AZKjvbvTieeQhAGmg7t0TDw8+w6l8CiinOv32NKwNSbe51sH9Z3PLw6lV3MS4GjSydG9A== Completed in 28ms
+npm timing metavuln:cache:get:security-advisory:next:Afe67Rx5AFGZTO76ZLE6Nu2nSbGW6gF1GmaG3uRnozCGeLHXt2Obv7rExGB3bZ3uISj9T+IxVPPKEUK3/f/mrw== Completed in 29ms
+npm timing metavuln:cache:get:security-advisory:next:qhgEeOu43M5KY6SU3HVSJsBjRLRtdh5xDpqekmHbMUo3NDpoGQNYb7tnBN0v5mdooOVmctgdcdVXnVoMgJRrHQ== Completed in 29ms
+npm timing metavuln:cache:get:security-advisory:next:giIuLcj+n55aQ/5crOvPoBnzfmuxZfQYBk/L4YVJXo4hM/q3Z5AMupfCZSKD+9YUQQ3qNY1gDSMxRV1k68M72Q== Completed in 29ms
+npm timing metavuln:cache:get:security-advisory:next:Is7cIy8Frz9MwPIZJhDXIW9YKe7An6ZHiQQCPaBCCsmtnfX39R0xm8Qt2bGfEQ+OML/W7WbmeTuKU+XFuhOSVQ== Completed in 30ms
+npm timing metavuln:cache:get:security-advisory:next:ID1ak30GUeaquPJNzcN0QxHbDYCDzP3tqCDSwjX9qeCAnbNuP81MN1IqxlKPEhfccFgjLcS0igKoFLkrvSVwUg== Completed in 30ms
+npm timing metavuln:cache:get:security-advisory:next:xvQLvndm0iSLH4AX0yyzvMZ7WpiAlwHTzf3wq1UAQLWZn14C2hTa30T82BmnI46b29V3twbfH2LVn3yuZJ2B9g== Completed in 31ms
+npm timing metavuln:cache:get:security-advisory:next:guUHoqXZ3tQN1f1kR+BKUy3bYwpyVtKOs/SgPMcBkxIrcKwwS2C2ZqWK6EsNv07HdgSUWP2/W9Q3m/y9UD6cQw== Completed in 31ms
+npm timing metavuln:cache:get:security-advisory:next:PkhhHBMtVd8ScEmfE4x5JNTq+eU5Ia/baObDF8NqnCvXOw31ReP4hZyC9wSL1JHk91FBAu7dUGd5vMxGAFf82Q== Completed in 32ms
+npm timing metavuln:cache:get:security-advisory:next:R4EaaDGAauqYIvt3DmSOoxqx5eYJsBW1Qm6Eu+R3Ikwkg7Brm8gAxE8jday72g4Rsqyk4l4ZA1zDiggyn5vxnA== Completed in 32ms
+npm timing metavuln:cache:get:security-advisory:next:iBnrIOXyil1VPmmJAtwjFDq5NRodhkak6NIYvPlMiorwFcjc7JB7N6Os8NHQcJ/WrC7D8wHFmHY7k6ppew6MuA== Completed in 33ms
+npm timing metavuln:cache:get:security-advisory:next:Y+9Qm+uuJ/JR8nSanllkCSVQH7uL6+pVZ7lBGBcvg47PpMA9b5ZNia0eFaKxb6DAwbs7B4M5m7Ceq1/KhN+Oyg== Completed in 34ms
+npm timing metavuln:cache:get:security-advisory:next:ceLGPiGST24dRwTWkhqWiP3hz9qwDMWpob3wEKYFlMJBAsE9Neof8fYVAukcNW3Um+wTPgvUj2VlrXFiq0Hvsw== Completed in 34ms
+npm timing metavuln:cache:get:security-advisory:next:eXt6CdGz9eRBWjhE/Iwv0eHH26ECB13MOc/CqvVZqmPlrAWwRN7FcJx7e7ieumo/DI3pKY4Xd/HUF+r82At3MA== Completed in 35ms
+npm timing metavuln:cache:get:security-advisory:next:4RQqvFwYalh/d2qqZp2D5+sXsyGdqHE2Gbl8lZrf6tLFALUNsLfUqk097JLwYLn2MdFQWzScg4va8QFt1ljPKA== Completed in 40ms
+npm timing metavuln:cache:get:security-advisory:next:JceAQ06gOGOq6gNkZq/SmD3vvMr/15arxz3wwx13EjSomWeX/XI0eNiV81v++rNLUgUu2xfAqLV1PjVwmvvvsg== Completed in 41ms
+npm timing metavuln:cache:get:security-advisory:next:qf+tm4vVzT7Cu0wjLOqelEl0bucdY0kaoicQNBXgFrc3q8lWnB7maTuPS/y/Dgr0zsSD8orm6Xn3FXG2zntNQQ== Completed in 41ms
+npm timing metavuln:cache:get:security-advisory:next:Wo20kzrH0ECxf/htqHKokr1ZwnDCtXsNvesQTq99U5OhsvO57DUeVN+EnmREgLGeHX3RIUW+Y+nH/+Ytzu/IXw== Completed in 42ms
+npm timing metavuln:cache:get:security-advisory:next:UhujRna1E9R3UDbi/sfTTjNL602/21ZOf9d5ri0JNOt3M6J41VcGBMpuo3yOxxyfi4DO8l3RYjfFouvXQmzRlQ== Completed in 42ms
+npm timing metavuln:cache:get:security-advisory:next:tAMofIe+0PKGrsWfGOWcFGBqaVN4UZQm1AvtkCP0FbNSxhHb4fWPJWUEfe5RQeS5YGzFIngH5wQ4Wm7cDr+TiA== Completed in 43ms
+npm timing metavuln:cache:get:security-advisory:next:DgnuDXSXYVWW/8c7sPB6/wdM98wv6ntB/TbzG8QWlVlD21TodAofkxkKC1XWmfLG3eL6WUq8oB1+bBgRz2VE2g== Completed in 43ms
+npm timing metavuln:cache:get:security-advisory:next:EpfIz/KdB24bRZ6q0LGSWl0J9f4zv9PUD9ElsesuI1G0c8S4f5GCzPUOfhxTvPJxtqRITVDaZfcAV+L0BXUdcw== Completed in 44ms
+npm timing metavuln:cache:get:security-advisory:postcss:685RVq5xScaqegAXk2BRJrsMaZmsz1d/volUoA67iVw3AvHhUlX03u+VPRrmo8iuObcSDvuZF+fuiOnLC9L1uA== Completed in 43ms
+npm timing metavuln:cache:get:security-advisory:next:gWZIstnTuJXa4/ldYQ1X3M/yK016LUiPi7pwVx2YpDi9T00aZDBgzeukVbq47ioFidtfhN88Edza02nP31W7rg== Completed in 44ms
+npm timing metavuln:cache:get:security-advisory:postcss:vffDf5zeMAO2NG2g47VKaOSrYbOxy9RP7hONH+CZvut446KUCIkc3Fp1vXR3T1gMxB3d9F68wTGe2BUQF6ut/w== Completed in 44ms
+npm timing metavuln:cache:get:security-advisory:sharp:w/YUeEHCJfwHbi38I9zC3EW52XhF0B3WH6aV+Ru11plPLESCoo23qU65YSuk2Jzg7frNjgJD6bJhcE2dLbW/Xw== Completed in 44ms
+npm timing metavuln:cache:get:security-advisory:next:ghawWDyHOv0yT70Odg+hWtvVGMiHn+xK72XhUmN1t2GIzvMNzHv2+szUafarycctzoWesWMGpiJppKRiLrskpw== Completed in 45ms
+npm timing metavuln:cache:get:security-advisory:sharp:AMhKztAOenk9sflyUi4sMyO4lcyKWfRBC9XaNvNYljUSLorFYtX31vJVIzKu5+H8cmhPDpmsteYIph4wPng+FA== Completed in 44ms
+npm timing metavuln:cache:get:security-advisory:postcss:CYQpgMxvTqXBVaZq1NAr4RIFkWLFCwyobLa0hEv7E4gMg411Yb94I7Uru51Ci3hUITmSGFK7DCDkX4TqzQYsaw== Completed in 45ms
+npm timing metavuln:cache:get:security-advisory:source-map-js:OfqyNeSrMkVVMUCD/VY8Q3W/CEhGckahrc//hDvq66mTpnyypsPiDGtY4FSekAZg40e0EazxyNp7tMMxYImjtQ== Completed in 45ms
+npm timing metavuln:cache:get:security-advisory:sharp:e3+l4dEi38ffeBSBKK1YyeOd5u2rDq2L63JVA3WprqaOMSMaLjnF/Vh+tpBVUkYAEap+P5VFuATdhOkBmZp8AA== Completed in 45ms
+npm timing metavuln:cache:get:security-advisory:uuid:fjKShcKspemxj7050oTyq4F6Ys6oXOzZoO3QUapp6PgJCcrmTMbXQaxkcJ1QLLNHzsQ9sgLuhrlezjv+hoSUhg== Completed in 45ms
+npm timing metavuln:cache:get:security-advisory:next:HZv43txeMuWyMNwt+F2rxn8LGcIHPyQlSfV9/njSG7dj9nUpFDg26BLxRBMMQdaWTrJxhXnt8x8whLPGqax7Iw== Completed in 47ms
+npm timing metavuln:cache:get:security-advisory:next:0vl9DjYWfvbagiSU63J8+pqHi3m6CEfW473slxKnQWlQ4FuhoDmTnd8tQfCF+UElOpn/Dui9/JFdp7s+4YCQng== Completed in 47ms
+npm timing metavuln:cache:get:security-advisory:postcss:AESkqup7C9sLtHL0OzenAvihqmLzSTOW4+0zIkCCeUjI0qvgEu/UCFfVCIlWzUpfDq20KxUSH5Ru8h4LoxJKRA== Completed in 47ms
+npm timing metavuln:packument:csv-parse Completed in 62ms
+npm timing metavuln:load:security-advisory:csv-parse:1193670 Completed in 1ms
+npm timing metavuln:calculate:security-advisory:csv-parse:1193670 Completed in 63ms
+npm timing metavuln:packument:postcss Completed in 65ms
+npm timing metavuln:load:security-advisory:postcss:1130709 Completed in 1ms
+npm timing metavuln:calculate:security-advisory:postcss:1130709 Completed in 66ms
+npm timing metavuln:load:security-advisory:postcss:1117015 Completed in 1ms
+npm timing metavuln:calculate:security-advisory:postcss:1117015 Completed in 66ms
+npm timing metavuln:load:security-advisory:postcss:1124252 Completed in 1ms
+npm timing metavuln:calculate:security-advisory:postcss:1124252 Completed in 67ms
+npm timing metavuln:load:security-advisory:postcss:1139510 Completed in 1ms
+npm timing metavuln:calculate:security-advisory:postcss:1139510 Completed in 68ms
+npm timing metavuln:packument:sharp Completed in 71ms
+npm timing metavuln:load:security-advisory:sharp:1124066 Completed in 1ms
+npm timing metavuln:calculate:security-advisory:sharp:1124066 Completed in 73ms
+npm timing metavuln:load:security-advisory:sharp:1193725 Completed in 1ms
+npm timing metavuln:calculate:security-advisory:sharp:1193725 Completed in 74ms
+npm timing metavuln:load:security-advisory:sharp:1241331 Completed in 1ms
+npm timing metavuln:calculate:security-advisory:sharp:1241331 Completed in 75ms
+npm timing metavuln:packument:esbuild Completed in 88ms
+npm timing metavuln:load:security-advisory:esbuild:1102341 Completed in 5ms
+npm timing metavuln:calculate:security-advisory:esbuild:1102341 Completed in 93ms
+npm timing metavuln:load:security-advisory:esbuild:1120680 Completed in 1ms
+npm timing metavuln:calculate:security-advisory:esbuild:1120680 Completed in 91ms
+npm timing metavuln:packument:nanoid Completed in 93ms
+npm timing metavuln:load:security-advisory:nanoid:1138811 Completed in 0ms
+npm timing metavuln:calculate:security-advisory:nanoid:1138811 Completed in 93ms
+npm timing metavuln:load:security-advisory:nanoid:1139427 Completed in 1ms
+npm timing metavuln:calculate:security-advisory:nanoid:1139427 Completed in 94ms
+npm timing metavuln:packument:uuid Completed in 93ms
+npm timing metavuln:load:security-advisory:uuid:1119441 Completed in 1ms
+npm timing metavuln:calculate:security-advisory:uuid:1119441 Completed in 94ms
+npm timing metavuln:packument:baseline-browser-mapping Completed in 99ms
+npm timing metavuln:load:security-advisory:baseline-browser-mapping:1193686 Completed in 1ms
+npm timing metavuln:calculate:security-advisory:baseline-browser-mapping:1193686 Completed in 100ms
+npm timing metavuln:packument:source-map-js Completed in 98ms
+npm timing metavuln:load:security-advisory:source-map-js:1241209 Completed in 0ms
+npm timing metavuln:calculate:security-advisory:source-map-js:1241209 Completed in 98ms
+npm timing metavuln:packument:next Completed in 331ms
+npm timing metavuln:load:security-advisory:next:1117930 Completed in 44ms
+npm timing metavuln:calculate:security-advisory:next:1117930 Completed in 375ms
+npm timing metavuln:load:security-advisory:next:1118941 Completed in 33ms
+npm timing metavuln:calculate:security-advisory:next:1118941 Completed in 408ms
+npm timing metavuln:load:security-advisory:next:1118943 Completed in 33ms
+npm timing metavuln:calculate:security-advisory:next:1118943 Completed in 442ms
+npm timing metavuln:load:security-advisory:next:1118945 Completed in 33ms
+npm timing metavuln:calculate:security-advisory:next:1118945 Completed in 475ms
+npm timing metavuln:load:security-advisory:next:1118947 Completed in 33ms
+npm timing metavuln:calculate:security-advisory:next:1118947 Completed in 508ms
+npm timing metavuln:load:security-advisory:next:1118949 Completed in 33ms
+npm timing metavuln:calculate:security-advisory:next:1118949 Completed in 541ms
+npm timing metavuln:load:security-advisory:next:1118951 Completed in 33ms
+npm timing metavuln:calculate:security-advisory:next:1118951 Completed in 575ms
+npm timing metavuln:load:security-advisory:next:1118953 Completed in 36ms
+npm timing metavuln:calculate:security-advisory:next:1118953 Completed in 611ms
+npm timing metavuln:load:security-advisory:next:1118955 Completed in 30ms
+npm timing metavuln:calculate:security-advisory:next:1118955 Completed in 642ms
+npm timing metavuln:load:security-advisory:next:1118957 Completed in 30ms
+npm timing metavuln:calculate:security-advisory:next:1118957 Completed in 673ms
+npm timing metavuln:load:security-advisory:next:1118959 Completed in 30ms
+npm timing metavuln:calculate:security-advisory:next:1118959 Completed in 704ms
+npm timing metavuln:load:security-advisory:next:1118961 Completed in 31ms
+npm timing metavuln:calculate:security-advisory:next:1118961 Completed in 735ms
+npm timing metavuln:load:security-advisory:next:1124184 Completed in 32ms
+npm timing metavuln:calculate:security-advisory:next:1124184 Completed in 769ms
+npm timing metavuln:load:security-advisory:next:1124186 Completed in 32ms
+npm timing metavuln:calculate:security-advisory:next:1124186 Completed in 802ms
+npm timing metavuln:load:security-advisory:next:1124170 Completed in 32ms
+npm timing metavuln:calculate:security-advisory:next:1124170 Completed in 834ms
+npm timing metavuln:load:security-advisory:next:1124171 Completed in 33ms
+npm timing metavuln:calculate:security-advisory:next:1124171 Completed in 867ms
+npm timing metavuln:load:security-advisory:next:1124188 Completed in 30ms
+npm timing metavuln:calculate:security-advisory:next:1124188 Completed in 898ms
+npm timing metavuln:load:security-advisory:next:1124190 Completed in 30ms
+npm timing metavuln:calculate:security-advisory:next:1124190 Completed in 929ms
+npm timing metavuln:load:security-advisory:next:1124192 Completed in 30ms
+npm timing metavuln:calculate:security-advisory:next:1124192 Completed in 959ms
+npm timing metavuln:load:security-advisory:next:1124194 Completed in 31ms
+npm timing metavuln:calculate:security-advisory:next:1124194 Completed in 990ms
+npm timing metavuln:load:security-advisory:next:1124196 Completed in 32ms
+npm timing metavuln:calculate:security-advisory:next:1124196 Completed in 1022ms
+npm timing metavuln:load:security-advisory:next:1241496 Completed in 31ms
+npm timing metavuln:calculate:security-advisory:next:1241496 Completed in 1054ms
+npm timing metavuln:load:security-advisory:next:1193676 Completed in 31ms
+npm timing metavuln:calculate:security-advisory:next:1193676 Completed in 1085ms
+npm timing metavuln:load:security-advisory:next:1193732 Completed in 32ms
+npm timing metavuln:calculate:security-advisory:next:1193732 Completed in 1117ms
+npm timing metavuln:load:security-advisory:next:1240609 Completed in 32ms
+npm timing metavuln:calculate:security-advisory:next:1240609 Completed in 1149ms
+npm timing metavuln:load:security-advisory:next:1241493 Completed in 30ms
+npm timing metavuln:calculate:security-advisory:next:1241493 Completed in 1180ms
+npm timing metavuln:load:security-advisory:next:1241495 Completed in 31ms
+npm timing metavuln:calculate:security-advisory:next:1241495 Completed in 1211ms
+npm timing metavuln:load:security-advisory:next:1241490 Completed in 31ms
+npm timing metavuln:calculate:security-advisory:next:1241490 Completed in 1242ms
+npm timing metavuln:load:security-advisory:next:1241492 Completed in 31ms
+npm timing metavuln:calculate:security-advisory:next:1241492 Completed in 1273ms
+npm timing metavuln:load:security-advisory:next:1242818 Completed in 32ms
+npm timing metavuln:calculate:security-advisory:next:1242818 Completed in 1305ms
+npm timing metavuln:load:security-advisory:next:1242816 Completed in 31ms
+npm timing metavuln:calculate:security-advisory:next:1242816 Completed in 1336ms
+npm timing metavuln:load:security-advisory:next:1242859 Completed in 31ms
+npm timing metavuln:calculate:security-advisory:next:1242859 Completed in 1367ms
+npm timing metavuln:load:security-advisory:next:1244535 Completed in 31ms
+npm timing metavuln:calculate:security-advisory:next:1244535 Completed in 1398ms
+npm timing metavuln:load:security-advisory:next:1247712 Completed in 29ms
+npm timing metavuln:calculate:security-advisory:next:1247712 Completed in 1429ms
+npm timing metavuln:load:security-advisory:next:1248078 Completed in 31ms
+npm timing metavuln:calculate:security-advisory:next:1248078 Completed in 1460ms
+npm timing metavuln:load:security-advisory:next:1248080 Completed in 31ms
+npm timing metavuln:calculate:security-advisory:next:1248080 Completed in 1491ms
+npm timing metavuln:load:security-advisory:next:1248083 Completed in 31ms
+npm timing metavuln:calculate:security-advisory:next:1248083 Completed in 1522ms
+npm timing metavuln:load:security-advisory:next:1248084 Completed in 31ms
+npm timing metavuln:calculate:security-advisory:next:1248084 Completed in 1553ms
+npm timing metavuln:cache:get:security-advisory:@esbuild-kit/core-utils:QWr7rHrhIrLlRjYpr1VfwIE8AKAqPNpFR+YQLZGNvf4WWxomgQSvZ8bNzzflX9CujuIG+R/G+IIytOgslFjuSg== Completed in 3ms
+npm timing metavuln:packument:@esbuild-kit/core-utils Completed in 4ms
+npm timing metavuln:load:security-advisory:@esbuild-kit/core-utils:jKdCIzePj7J1488qgRXvF8Srh9wutSuR1exB8YooNX62hT+qhtrUXYbArLNoIhgwbaCqKpmduh18syZU7BR9SA== Completed in 0ms
+npm timing metavuln:calculate:security-advisory:@esbuild-kit/core-utils:jKdCIzePj7J1488qgRXvF8Srh9wutSuR1exB8YooNX62hT+qhtrUXYbArLNoIhgwbaCqKpmduh18syZU7BR9SA== Completed in 5ms
+npm timing metavuln:cache:get:security-advisory:tsx:ZM+I5Api23XhiK+wfkOz2ZWkzUT9JhigzEwe+x/+qhGb90og/dTL1YZNs+M+vfp8eKMVTWkfN5/rdZwbW83YNg== Completed in 1ms
+npm timing metavuln:packument:tsx Completed in 4ms
+npm timing metavuln:load:security-advisory:tsx:mmDbmXeify80UdRagFfITBhG3xHP4llbx8MchwTjBL3g0WFb/cK8N40wL0tjqR9NE2gMLzj7SHOX2g2NoW8+ew== Completed in 0ms
+npm timing metavuln:calculate:security-advisory:tsx:mmDbmXeify80UdRagFfITBhG3xHP4llbx8MchwTjBL3g0WFb/cK8N40wL0tjqR9NE2gMLzj7SHOX2g2NoW8+ew== Completed in 4ms
+npm timing metavuln:cache:get:security-advisory:next:R4ef/JiSssTZD7lkHX6Rz5Js3yIq/7nM8cBGWVP7zTbvlPUEZFtuvqu652kiDjShGTCR/j7Jk5PU1ykZtKA0Qw== Completed in 1ms
+npm timing metavuln:load:security-advisory:next:19CNVb4Xa9j8tskjmac2L3l7Ab8xNBmfPNTfjbdzQA2Q1D6ZL2kqioPmLUNIiNnwlnmMHjIIXRjGBqxQig7fxQ== Completed in 32ms
+npm timing metavuln:calculate:security-advisory:next:19CNVb4Xa9j8tskjmac2L3l7Ab8xNBmfPNTfjbdzQA2Q1D6ZL2kqioPmLUNIiNnwlnmMHjIIXRjGBqxQig7fxQ== Completed in 33ms
+npm timing metavuln:cache:get:security-advisory:postcss:YBfeyDPflgmV1VLpFMWwmJOBdknyfVaqmuczQ5eLB+X+h/OZoQIwxgTibSchQjDmj6xXkd8gsRyU6MXOwiCi3g== Completed in 1ms
+npm timing metavuln:load:security-advisory:postcss:G4d3k7GgtTq4GBrwzQ8/x7W0iUhlZxJRv8ECCIxQ8EljG7i12UNClh6yRGwC76MzFuAF5klybdArzm40c5m6pg== Completed in 1ms
+npm timing metavuln:calculate:security-advisory:postcss:G4d3k7GgtTq4GBrwzQ8/x7W0iUhlZxJRv8ECCIxQ8EljG7i12UNClh6yRGwC76MzFuAF5klybdArzm40c5m6pg== Completed in 2ms
+npm timing metavuln:cache:get:security-advisory:@tailwindcss/postcss:vzJXhBb/F/6bVfNPZ2HPVvRwbi4SU/kS6bO22sIg4xGaQMMfUfEvVxV0vrUYR8GSWoNIfxkO53LluW+EHEqGyg== Completed in 1ms
+npm timing metavuln:cache:get:security-advisory:next:8RlZE+IBinmJoMk6uVcV95MAfxYTQeaA9Sha1X47EU6Yn2I1DpgEjVbSe9Dat8c1Oy+nk6MRHrCODNvFggnzeg== Completed in 3ms
+npm timing metavuln:load:security-advisory:next:AESkqup7C9sLtHL0OzenAvihqmLzSTOW4+0zIkCCeUjI0qvgEu/UCFfVCIlWzUpfDq20KxUSH5Ru8h4LoxJKRA== Completed in 37ms
+npm timing metavuln:calculate:security-advisory:next:AESkqup7C9sLtHL0OzenAvihqmLzSTOW4+0zIkCCeUjI0qvgEu/UCFfVCIlWzUpfDq20KxUSH5Ru8h4LoxJKRA== Completed in 41ms
+npm timing metavuln:packument:@tailwindcss/postcss Completed in 50ms
+npm timing metavuln:load:security-advisory:@tailwindcss/postcss:AESkqup7C9sLtHL0OzenAvihqmLzSTOW4+0zIkCCeUjI0qvgEu/UCFfVCIlWzUpfDq20KxUSH5Ru8h4LoxJKRA== Completed in 4ms
+npm timing metavuln:calculate:security-advisory:@tailwindcss/postcss:AESkqup7C9sLtHL0OzenAvihqmLzSTOW4+0zIkCCeUjI0qvgEu/UCFfVCIlWzUpfDq20KxUSH5Ru8h4LoxJKRA== Completed in 54ms
+npm timing metavuln:cache:get:security-advisory:next:ifQt7MBMqEd9Arc65bPgbO7NN/CPItaUqh9qgYerFG+D6Z5OJOW1AZSSjU1PnJnxST7gEeAzzHeGiFNe99agnA== Completed in 31ms
+npm timing metavuln:load:security-advisory:next:AMhKztAOenk9sflyUi4sMyO4lcyKWfRBC9XaNvNYljUSLorFYtX31vJVIzKu5+H8cmhPDpmsteYIph4wPng+FA== Completed in 36ms
+npm timing metavuln:calculate:security-advisory:next:AMhKztAOenk9sflyUi4sMyO4lcyKWfRBC9XaNvNYljUSLorFYtX31vJVIzKu5+H8cmhPDpmsteYIph4wPng+FA== Completed in 67ms
+npm timing metavuln:cache:get:security-advisory:@tailwindcss/node:aOfddhE4HKQRvc5BRn4daSnAhDAp6wBxzVYVKmqeOgg2PbKTV2j1FJD+ImC3hM/ShyaT84rRBj3s6jJwylXXCA== Completed in 2ms
+npm timing metavuln:cache:get:security-advisory:postcss:8+u/g5N1jPZ5QXSZ4JUTSkYTRZ3EP/WwCbz56XZzaejWaNR/SEJIWqsaQoPh4mNVMKoO5ZtgfVcxM4qOA7wEAA== Completed in 2ms
+npm timing metavuln:load:security-advisory:postcss:OfqyNeSrMkVVMUCD/VY8Q3W/CEhGckahrc//hDvq66mTpnyypsPiDGtY4FSekAZg40e0EazxyNp7tMMxYImjtQ== Completed in 0ms
+npm timing metavuln:calculate:security-advisory:postcss:OfqyNeSrMkVVMUCD/VY8Q3W/CEhGckahrc//hDvq66mTpnyypsPiDGtY4FSekAZg40e0EazxyNp7tMMxYImjtQ== Completed in 2ms
+npm timing metavuln:packument:@tailwindcss/node Completed in 12ms
+npm timing metavuln:load:security-advisory:@tailwindcss/node:OfqyNeSrMkVVMUCD/VY8Q3W/CEhGckahrc//hDvq66mTpnyypsPiDGtY4FSekAZg40e0EazxyNp7tMMxYImjtQ== Completed in 4ms
+npm timing metavuln:calculate:security-advisory:@tailwindcss/node:OfqyNeSrMkVVMUCD/VY8Q3W/CEhGckahrc//hDvq66mTpnyypsPiDGtY4FSekAZg40e0EazxyNp7tMMxYImjtQ== Completed in 17ms
+npm timing metavuln:cache:get:security-advisory:svix:nPGnMbZAHYOF4iqiIcTA9d9B/xuxfyGc6/ODJCKpf2vC4L+fn+OQlVnxyFODSIABMNdlVgWw3a6YYTdX6mxV+A== Completed in 1ms
+npm timing metavuln:packument:svix Completed in 6ms
+npm timing metavuln:load:security-advisory:svix:fjKShcKspemxj7050oTyq4F6Ys6oXOzZoO3QUapp6PgJCcrmTMbXQaxkcJ1QLLNHzsQ9sgLuhrlezjv+hoSUhg== Completed in 1ms
+npm timing metavuln:calculate:security-advisory:svix:fjKShcKspemxj7050oTyq4F6Ys6oXOzZoO3QUapp6PgJCcrmTMbXQaxkcJ1QLLNHzsQ9sgLuhrlezjv+hoSUhg== Completed in 7ms
+npm timing metavuln:cache:get:security-advisory:@esbuild-kit/esm-loader:dM1raP9ooaG7+TcdvwY6fejABcBRVEb0szo3xbZeRxxOvzToM7WmZiJGxBVMqoOQFvc6vPF/chev1Lo81TfpHw== Completed in 1ms
+npm timing metavuln:packument:@esbuild-kit/esm-loader Completed in 3ms
+npm timing metavuln:load:security-advisory:@esbuild-kit/esm-loader:QWr7rHrhIrLlRjYpr1VfwIE8AKAqPNpFR+YQLZGNvf4WWxomgQSvZ8bNzzflX9CujuIG+R/G+IIytOgslFjuSg== Completed in 0ms
+npm timing metavuln:calculate:security-advisory:@esbuild-kit/esm-loader:QWr7rHrhIrLlRjYpr1VfwIE8AKAqPNpFR+YQLZGNvf4WWxomgQSvZ8bNzzflX9CujuIG+R/G+IIytOgslFjuSg== Completed in 3ms
+npm timing metavuln:cache:get:security-advisory:resend:fZw32DPS+qIM2ZWc9SuYo1PLGC2S+cE60jZLf/m9aZBHxaakaA/mM4fQjC0FhSJhCj+/12rHPDi+3lHGe8Ko7Q== Completed in 1ms
+npm timing metavuln:packument:resend Completed in 4ms
+npm timing metavuln:load:security-advisory:resend:nPGnMbZAHYOF4iqiIcTA9d9B/xuxfyGc6/ODJCKpf2vC4L+fn+OQlVnxyFODSIABMNdlVgWw3a6YYTdX6mxV+A== Completed in 1ms
+npm timing metavuln:calculate:security-advisory:resend:nPGnMbZAHYOF4iqiIcTA9d9B/xuxfyGc6/ODJCKpf2vC4L+fn+OQlVnxyFODSIABMNdlVgWw3a6YYTdX6mxV+A== Completed in 5ms
+npm timing metavuln:cache:get:security-advisory:drizzle-kit:Uc7Kn2n/59d0y84Uj5hqxpVLrBgJFuvxmrmjnbcQpD2jgoLZJ1K0am3genLjBDtC7ZkUekAgQDM6OlubPKQ5HA== Completed in 1ms
+npm timing metavuln:packument:drizzle-kit Completed in 12ms
+npm timing metavuln:load:security-advisory:drizzle-kit:dM1raP9ooaG7+TcdvwY6fejABcBRVEb0szo3xbZeRxxOvzToM7WmZiJGxBVMqoOQFvc6vPF/chev1Lo81TfpHw== Completed in 2ms
+npm timing metavuln:calculate:security-advisory:drizzle-kit:dM1raP9ooaG7+TcdvwY6fejABcBRVEb0szo3xbZeRxxOvzToM7WmZiJGxBVMqoOQFvc6vPF/chev1Lo81TfpHw== Completed in 14ms
+npm timing auditReport:init Completed in 1796ms
+npm timing audit Completed in 1957ms
+# npm audit report
+
+baseline-browser-mapping  >=2.0.0 <2.11.0
+Severity: moderate
+baseline-browser-mapping process termination on invalid input causes denial of service - https://github.com/advisories/GHSA-w5vr-8v7q-w6rv
+fix available via `npm audit fix`
+node_modules/baseline-browser-mapping
+
+csv-parse  <7.0.2
+Severity: moderate
+node-csv: Prototype replacement still reachable via columns path - https://github.com/advisories/GHSA-8cw4-87c7-c6xx
+fix available via `npm audit fix --force`
+Will install csv-parse@7.0.3, which is a breaking change
+node_modules/csv-parse
+
+esbuild  <=0.24.2 || 0.27.3 - 0.28.0
+Severity: moderate
+esbuild enables any website to send any requests to the development server and read the response - https://github.com/advisories/GHSA-67mh-4wv8-2f99
+esbuild allows arbitrary file read when running the development server on Windows - https://github.com/advisories/GHSA-g7r4-m6w7-qqqr
+fix available via `npm audit fix --force`
+Will install drizzle-kit@0.18.1, which is a breaking change
+node_modules/@esbuild-kit/core-utils/node_modules/esbuild
+node_modules/tsx/node_modules/esbuild
+  @esbuild-kit/core-utils  *
+  Depends on vulnerable versions of esbuild
+  node_modules/@esbuild-kit/core-utils
+    @esbuild-kit/esm-loader  *
+    Depends on vulnerable versions of @esbuild-kit/core-utils
+    node_modules/@esbuild-kit/esm-loader
+      drizzle-kit  0.19.0 - 1.0.0-beta.1-fd8bfcc
+      Depends on vulnerable versions of @esbuild-kit/esm-loader
+      node_modules/drizzle-kit
+
+nanoid  <=3.3.17
+Severity: high
+nanoid: non-secure generators can loop indefinitely with negative size - https://github.com/advisories/GHSA-28wg-ghj8-5hjv
+nanoid: custom generators can loop indefinitely when size is zero - https://github.com/advisories/GHSA-2v37-7h3g-55p8
+fix available via `npm audit fix`
+node_modules/nanoid
+
+next  9.3.4-canary.0 - 16.4.4
+Severity: critical
+Next.js Vulnerable to Denial of Service with Server Components - https://github.com/advisories/GHSA-8h8q-6873-q5fj
+Next.js's Middleware / Proxy redirects can be cache-poisoned - https://github.com/advisories/GHSA-3g8h-86w9-wvmq
+Next.js vulnerable to cross-site scripting in App Router applications using CSP nonces - https://github.com/advisories/GHSA-ffhc-5mcf-pf4q
+Next.js vulnerable to cache poisoning via collisions in React Server Component cache-busting - https://github.com/advisories/GHSA-vfv6-92ff-j949
+Next.js has cross-site scripting in beforeInteractive scripts with untrusted input - https://github.com/advisories/GHSA-gx5p-jg67-6x7h
+Next.js vulnerable to Denial of Service via connection exhaustion in applications using Cache Components - https://github.com/advisories/GHSA-mg66-mrh9-m8jx
+Next.js has a Denial of Service in the Image Optimization API - https://github.com/advisories/GHSA-h64f-5h5j-jqjh
+Next.js vulnerable to server-side request forgery in applications using WebSocket upgrades - https://github.com/advisories/GHSA-c4j6-fc7j-m34r
+Next.js has a Middleware / Proxy bypass through dynamic route parameter injection - https://github.com/advisories/GHSA-492v-c6pp-mqqv
+Next.js vulnerable to cache poisoning in React Server Component responses - https://github.com/advisories/GHSA-wfc6-r584-vfw7
+Next.js has a Middleware / Proxy bypass in App Router applications via segment-prefetch routes - https://github.com/advisories/GHSA-267c-6grr-h53f
+Next.js has a Middleware / Proxy bypass in Pages Router applications using i18n - https://github.com/advisories/GHSA-36qx-fr4f-26g5
+Next.js: Middleware / Proxy bypass in App Router applications using Turbopack and single locale - https://github.com/advisories/GHSA-6gpp-xcg3-4w24
+Next.js: Denial of Service in App Router using Server Actions - https://github.com/advisories/GHSA-m99w-x7hq-7vfj
+Next.js: Server-Side Request Forgery in Server Actions on custom servers - https://github.com/advisories/GHSA-89xv-2m56-2m9x
+Next.js: Cache confusion of response bodies for requests with bodies - https://github.com/advisories/GHSA-68g3-v927-f742
+Next.js: Cache confusion of response bodies for requests with bodies containing invalid UTF-8 byte sequences - https://github.com/advisories/GHSA-4633-3j49-mh5q
+Next.js: Unbounded Server Action payload in Edge runtime - https://github.com/advisories/GHSA-4c39-4ccg-62r3
+Next.js: Server-Side Request Forgery in rewrites via attacker-controlled destination hostname - https://github.com/advisories/GHSA-p9j2-gv94-2wf4
+Next.js: Denial of Service in the Image Optimization API using SVGs - https://github.com/advisories/GHSA-q8wf-6r8g-63ch
+Next.js: Unauthenticated disclosure of internal Server Function endpoints - https://github.com/advisories/GHSA-955p-x3mx-jcvp
+Next.js: Unauthenticated Remote Code Execution on windows-hosted servers - https://github.com/advisories/GHSA-p293-qw3h-jr36
+Next.js: Unauthenticated Remote Code Execution in Image Optimization API when AVIF files are used - https://github.com/advisories/GHSA-2xp9-vwfh-vxw4
+Next.js: Remote Code Execution in next/og ImageResponse - https://github.com/advisories/GHSA-vcvr-r3jv-pc5j
+Next.js has cache poisoning of SSG and ISR pages in self-hosted applications - https://github.com/advisories/GHSA-4jqv-mc3x-m676
+Next.js has information disclosure in development server's Model Context Protocol endpoint - https://github.com/advisories/GHSA-39w2-rjm5-chcv
+Next.js has information disclosure in App Router metadata image routes via dynamicParams bypass - https://github.com/advisories/GHSA-f87g-xv8r-7p7x
+Next.js has cache poisoning in SSG/ISR rendering that leads to cross-user content substitution and persistent denial of service - https://github.com/advisories/GHSA-mcj8-r9mp-w47p
+Next.js has Server-Side Request Forgery in Image Optimization - https://github.com/advisories/GHSA-cjq9-62q9-8jv4
+Next.js: Unauthenticated Remote Code Execution in Image Optimization API when SVG files are used - https://github.com/advisories/GHSA-2464-fhr4-w9xw
+Next.js: Denial of Service in App Router using Server Actions - https://github.com/advisories/GHSA-p3m5-59mp-jv5r
+Next.js: Unauthenticated Remote Code Execution in `use cache` functions returning typed arrays - https://github.com/advisories/GHSA-673q-mjm6-r5xr
+Next.js has a Middleware / Proxy bypass in App Router applications via segment-prefetch routes - Incomplete Fix Follow-Up - https://github.com/advisories/GHSA-26hh-7cqf-hhc6
+Next.js: Cache leak across root param values in nested 'use cache' functions via delayed inner stream metadata - https://github.com/advisories/GHSA-vc7v-qv4w-wrv8
+Next.js: SVG rejection bypass in the image optimization - https://github.com/advisories/GHSA-7qx7-33qx-rqx2
+Next.js: HttpOnly cookie exposure through internal response header on Next.js Edge runtime routes - https://github.com/advisories/GHSA-f3mh-rxg3-f5g2
+Next.js: Cross-client response injection and disclosure in self-hosted Next.js applications forwarding fetched responses - https://github.com/advisories/GHSA-pc58-hwjq-p385
+Next.js: Cross-user cache disclosure and poisoning in Next.js use cache with binary arguments - https://github.com/advisories/GHSA-rhh4-g77r-r9qj
+Depends on vulnerable versions of postcss
+Depends on vulnerable versions of sharp
+fix available via `npm audit fix --force`
+Will install next@16.4.6, which is outside the stated dependency range
+node_modules/next
+
+postcss  <=8.5.22
+Severity: high
+PostCSS has XSS via Unescaped </style> in its CSS Stringify Output - https://github.com/advisories/GHSA-qx2v-qp2m-jg93
+PostCSS: Arbitrary file read and information disclosure via attacker-controlled sourceMappingURL in CSS comments - https://github.com/advisories/GHSA-6g55-p6wh-862q
+PostCSS: incomplete fix of GHSA-6g55-p6wh-862q — attacker-controlled sourceMappingURL reads arbitrary .map files when `from` is unset - https://github.com/advisories/GHSA-fxqj-rqcc-2cmp
+PostCSS: Path Traversal in Previous Source Map Auto-Loading (sourceMappingURL) leads to Arbitrary .map File Disclosure - https://github.com/advisories/GHSA-r28c-9q8g-f849
+fix available via `npm audit fix --force`
+Will install next@16.4.6, which is outside the stated dependency range
+node_modules/next/node_modules/postcss
+node_modules/postcss
+
+sharp  <=0.35.5-rc.1
+Severity: high
+sharp inherited vulnerabilities in libvips: CVE-2026-33327, CVE-2026-33328, CVE-2026-35590, CVE-2026-35591 - https://github.com/advisories/GHSA-f88m-g3jw-g9cj
+sharp: Vulnerabilities in libheif: GHSA-g89c-p67h-r497 and GHSA-2jg2-4ch7-h545 - https://github.com/advisories/GHSA-rgj7-g3m4-5g8c
+sharp : Vulnerability in librsvg dependency CVE-2026-96889 - https://github.com/advisories/GHSA-wq5f-xc86-pv6w
+fix available via `npm audit fix --force`
+Will install next@16.4.6, which is outside the stated dependency range
+node_modules/sharp
+
+source-map-js  1.0.0 - 1.2.1
+Severity: high
+source-map-js allows event-loop denial of service through indexed source-map section offsets - https://github.com/advisories/GHSA-68fv-2mgg-jv7q
+fix available via `npm audit fix`
+node_modules/source-map-js
+
+uuid  <11.1.1
+Severity: moderate
+uuid: Missing buffer bounds check in v3/v5/v6 when buf is provided - https://github.com/advisories/GHSA-w5hq-g745-h8pq
+fix available via `npm audit fix`
+node_modules/uuid
+  svix  1.68.0 - 1.91.1
+  Depends on vulnerable versions of uuid
+  node_modules/svix
+    resend  6.2.0-canary.0 - 6.12.2
+    Depends on vulnerable versions of svix
+    node_modules/resend
+
+14 vulnerabilities (9 moderate, 4 high, 1 critical)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+npm timing command:audit Completed in 2154ms
+npm timing npm Completed in 2310ms
