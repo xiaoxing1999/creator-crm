@@ -39,8 +39,11 @@ import {
   score,
   highMatch,
   compact,
-  shortlist,
-  shortlistable,
+  applyBulk,
+  inProductScope,
+  planBulk,
+  summarizeSkips,
+  type BulkAction,
 } from "@/lib/hub";
 import { Select, Face, Platform, Evidence, Modal } from "./shared";
 export type Changed = (ids: number[], patch: Partial<Creator>) => void;
@@ -147,7 +150,7 @@ export function Discovery({
   open: (c: Creator) => void;
   savedOnly?: boolean;
   notify: (s: string) => void;
-  apply?: Apply;
+  apply: Apply;
   memory?: Record<string, unknown>;
   memoryKey?: string;
 }) {
@@ -164,7 +167,7 @@ export function Discovery({
     [q, Q] = useState(kept.q ?? ""),
     [sort, S] = useState(kept.sort ?? "匹配分优先"),
     [cards, C] = useState(kept.cards ?? false),
-    [selection, setSelection] = useState({ p, ids: [] as number[] }),
+    [selection, setSelection] = useState({ scope: p, ids: [] as number[] }),
     [modal, M] = useState(""),
     [page, P] = useState(kept.page ?? 0),
     [tab, T] = useState(kept.tab ?? (savedOnly ? "已收藏" : "全部创作者")),
@@ -172,14 +175,27 @@ export function Discovery({
   useEffect(() => {
     memory[memoryKey] = { f, q, sort, cards, page, tab };
   }, [memory, memoryKey, f, q, sort, cards, page, tab]);
+  // Discard (not hide) the previous product's selection so it can never come back.
+  if (selection.scope !== p) setSelection({ scope: p, ids: [] });
   const ids =
-    selection.p === p
+    selection.scope === p
       ? selection.ids.filter((id) => rows.some((c) => c.id === id))
       : [];
-  const I = (next: number[]) => setSelection({ p, ids: next });
-  const eligible = rows.filter(
-    (c) => ids.includes(c.id) && shortlistable(c, p),
-  ).length;
+  const I = (next: number[]) => setSelection({ scope: p, ids: next });
+  const shortlistPlan = planBulk(rows, ids, p, { kind: "shortlist" });
+  const eligible = shortlistPlan.changed.length;
+  const campaignPlan = planBulk(rows, ids, p, { kind: "campaign", campaign });
+  const runBulk = (action: BulkAction, verb: string) => {
+    const r = applyBulk(rows, ids, p, action);
+    if (r.changed.length) apply((current) => applyBulk(current, ids, p, action).rows);
+    I([]);
+    notify(
+      `${products[p].asin}：已${verb} ${r.changed.length} 人` +
+        (r.skipped.length
+          ? `，跳过 ${r.skipped.length} 人（${summarizeSkips(r.skipped)}）`
+          : ""),
+    );
+  };
   const change = (k: keyof typeof empty, v: string) => {
     F({ ...f, [k]: v });
     P(0);
@@ -354,24 +370,17 @@ export function Discovery({
           </span>
           <button
             disabled={!eligible}
-            onClick={() => {
-              const result = shortlist(rows, ids, p);
-              if (apply) apply((r) => shortlist(r, ids, p).rows);
-              else
-                result.moved.forEach((id) =>
-                  update([id], { stage: stages[1], product: p }),
-                );
-              I([]);
-              notify(
-                `已将 ${result.moved.length} 位 ${products[p].asin} 候选移至已入围` +
-                  (result.skipped ? `，${result.skipped} 位保持不变` : ""),
-              );
-            }}
+            onClick={() => runBulk({ kind: "shortlist" }, "入围")}
           >
             <Bookmark />
             批量入围
           </button>
-          <button onClick={() => M("加入推广活动")}>
+          <button
+            disabled={
+              !rows.some((c) => ids.includes(c.id) && inProductScope(c, p))
+            }
+            onClick={() => M("加入推广活动")}
+          >
             <Plus />
             加入活动
           </button>
@@ -611,13 +620,18 @@ export function Discovery({
                 options={["新品首发", "冬季工具测评"]}
                 onChange={K}
               />
+              <p role="status" className="bulkplan">
+                {products[p].asin}：将加入 {campaignPlan.changed.length} 人
+                {campaignPlan.skipped.length > 0 &&
+                  `，跳过 ${campaignPlan.skipped.length} 人（${summarizeSkips(campaignPlan.skipped)}）`}
+                。加入活动不会改变合作阶段。
+              </p>
               <button
                 className="primary"
+                disabled={!campaignPlan.changed.length}
                 onClick={() => {
-                  update(ids, { campaign });
-                  I([]);
                   M("");
-                  notify("已加入" + campaign);
+                  runBulk({ kind: "campaign", campaign }, "加入「" + campaign + "」");
                 }}
               >
                 确认加入

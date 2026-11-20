@@ -332,7 +332,7 @@ export function Hub() {
                 </>
               )}
               <Discovery
-                key={view + "-" + work + "-" + savedOnly}
+                key={view + "-" + work + "-" + savedOnly + "-" + sim}
                 rows={data}
                 p={p}
                 update={update}

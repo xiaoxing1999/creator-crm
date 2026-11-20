@@ -289,8 +289,11 @@ export function Profile({
               let budget: number | null;
               try {
                 budget = parseBudget(draft.budget);
-              } catch {
-                setError("保存失败：预算必须是非负有限数值");
+              } catch (e) {
+                setError(
+                  "保存失败：" +
+                    (e instanceof RangeError ? e.message : "预算无效"),
+                );
                 return;
               }
               if (!draft.due || !draft.deliverable.trim()) {

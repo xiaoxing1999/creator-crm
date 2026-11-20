@@ -104,45 +104,125 @@ export const score = (c: Creator, p: number) =>
   factors(c, p).reduce((a, b) => a + b, 0);
 export const highMatch = (c: Creator, p: number) =>
   c.niche === niches[products[p].niche] && score(c, p) >= 80;
-export function parseBudget(raw: string): number | null {
+// Mirrors a future numeric(12,2) column. The JS number returned here is only for
+// the mock UI; production must carry amounts as Decimal or integer cents.
+// Integer cents stay below 2^53, so plain numbers are exact here.
+export const BUDGET_MAX_CENTS = 999_999_999_999;
+export const BUDGET_MAX_LABEL = "9,999,999,999.99";
+const BUDGET_PATTERN = /^(0|[1-9]\d{0,2}(?:,\d{3})+|[1-9]\d*)(?:\.(\d{1,2}))?$/;
+export function parseBudgetCents(raw: string): number | null {
   const text = raw.trim();
   if (!text) return null;
-  const value = Number(
-    /^\d{1,3}(,\d{3})+(\.\d+)?$/.test(text) ? text.replace(/,/g, "") : text,
-  );
-  if (!Number.isFinite(value) || value < 0)
-    throw new RangeError("预算必须是非负有限数值");
-  return value;
+  const m = BUDGET_PATTERN.exec(text);
+  if (!m)
+    throw new RangeError(
+      "预算格式无效：仅支持非负十进制、合法千分位，最多两位小数",
+    );
+  const whole = m[1].replace(/,/g, "");
+  const tooLarge = () => new RangeError("预算超过上限 " + BUDGET_MAX_LABEL);
+  if (whole.length > 10) throw tooLarge();
+  const cents = Number(whole) * 100 + Number((m[2] ?? "").padEnd(2, "0"));
+  if (cents > BUDGET_MAX_CENTS) throw tooLarge();
+  return cents;
+}
+export function parseBudget(raw: string): number | null {
+  const cents = parseBudgetCents(raw);
+  return cents === null ? null : cents / 100;
 }
 export const compact = (n: number) =>
   Intl.NumberFormat("en-US", {
     notation: "compact",
     maximumFractionDigits: 1,
   }).format(n);
-export const shortlistable = (c: Creator, p: number) =>
-  c.stage === stages[0] && (c.product === p || c.product === -1);
-export function shortlist(rows: Creator[], ids: number[], p: number) {
-  const moved = rows
-    .filter((c) => ids.includes(c.id) && shortlistable(c, p))
-    .map((c) => c.id);
+export const UNASSIGNED = -1;
+export const inProductScope = (c: Creator, p: number) =>
+  c.product === p || c.product === UNASSIGNED;
+export type BulkAction =
+  | { kind: "shortlist" }
+  | { kind: "campaign"; campaign: string };
+export type SkipReason = "missing" | "other-asin" | "not-discovered" | "no-change";
+export const skipLabels: Record<SkipReason, string> = {
+  missing: "不在当前数据中",
+  "other-asin": "关联其他 ASIN",
+  "not-discovered": "非已发现阶段",
+  "no-change": "无需变更",
+};
+export function bulkSkipReason(
+  c: Creator | undefined,
+  p: number,
+  action: BulkAction,
+): SkipReason | null {
+  if (!c) return "missing";
+  if (!inProductScope(c, p)) return "other-asin";
+  if (action.kind === "shortlist" && c.stage !== stages[0])
+    return "not-discovered";
+  if (action.kind === "campaign" && c.campaign === action.campaign)
+    return "no-change";
+  return null;
+}
+function bulkPatch(c: Creator, p: number, action: BulkAction): Creator {
+  const asin = products[p].asin;
+  return action.kind === "shortlist"
+    ? {
+        ...c,
+        stage: stages[1],
+        product: p,
+        history: [...c.history, `阶段变更：已入围（${asin}）`],
+      }
+    : {
+        ...c,
+        campaign: action.campaign,
+        product: p,
+        history: [...c.history, `加入活动：${action.campaign}（${asin}）`],
+      };
+}
+export function planBulk(
+  rows: Creator[],
+  ids: number[],
+  p: number,
+  action: BulkAction,
+) {
+  const changed: number[] = [];
+  const skipped: { id: number; reason: SkipReason }[] = [];
+  for (const id of new Set(ids)) {
+    const reason = bulkSkipReason(
+      rows.find((c) => c.id === id),
+      p,
+      action,
+    );
+    if (reason) skipped.push({ id, reason });
+    else changed.push(id);
+  }
+  return { changed, skipped };
+}
+export function applyBulk(
+  rows: Creator[],
+  ids: number[],
+  p: number,
+  action: BulkAction,
+) {
+  const plan = planBulk(rows, ids, p, action);
   return {
-    moved,
-    skipped: ids.filter((id) => rows.some((c) => c.id === id)).length -
-      moved.length,
+    ...plan,
     rows: rows.map((c) =>
-      moved.includes(c.id)
-        ? {
-            ...c,
-            stage: stages[1],
-            product: p,
-            history: [
-              ...c.history,
-              `阶段变更：已入围（${products[p].asin}）`,
-            ],
-          }
-        : c,
+      plan.changed.includes(c.id) ? bulkPatch(c, p, action) : c,
     ),
   };
+}
+export const shortlistable = (c: Creator, p: number) =>
+  bulkSkipReason(c, p, { kind: "shortlist" }) === null;
+export function shortlist(rows: Creator[], ids: number[], p: number) {
+  const r = applyBulk(rows, ids, p, { kind: "shortlist" });
+  return {
+    moved: r.changed,
+    skipped: r.skipped.filter((s) => s.reason !== "missing").length,
+    rows: r.rows,
+  };
+}
+export function summarizeSkips(skipped: { reason: SkipReason }[]) {
+  const counts = new Map<SkipReason, number>();
+  for (const s of skipped) counts.set(s.reason, (counts.get(s.reason) ?? 0) + 1);
+  return [...counts].map(([r, n]) => `${skipLabels[r]} ${n} 人`).join("、");
 }
 export const moveStage = (rows: Creator[], id: number, stage: string) =>
   rows.map((c) =>
@@ -155,5 +235,6 @@ export const service = {
   update: (rows: Creator[], ids: number[], patch: Partial<Creator>) =>
     rows.map((c) => (ids.includes(c.id) ? { ...c, ...patch } : c)),
   shortlist,
+  applyBulk,
   moveStage,
 };

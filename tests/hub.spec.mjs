@@ -115,6 +115,39 @@ test("切换 ASIN 清空选择，批量入围只作用于当前 ASIN", async ({ 
   await expect(stageOf("Maya Chen")).toHaveText("已入围");
   await expect(btn(p, "收藏 Ethan Brooks")).toHaveAttribute("aria-pressed", "false");
 });
+test("A→B→A 切换 ASIN 后旧选择不复活，批量操作不会作用于隐藏选择", async ({ page: p }) => {
+  const pick = async (name) => {
+    await btn(p, "切换商品").click();
+    await p.getByRole("button", { name }).click();
+  };
+  await p.getByLabel("选择 Ethan Brooks").check();
+  await expect(p.locator(".bulk")).toContainText("已选 1 人");
+  await pick(/便携汽车诊断仪/);
+  await expect(p.locator(".bulk")).toHaveCount(0);
+  await pick(/20V 无刷充电电钻套装/);
+  await expect(p.locator(".bulk")).toHaveCount(0);
+  await expect(p.getByLabel("选择 Ethan Brooks")).not.toBeChecked();
+  await expect(p.locator("tbody tr").filter({ hasText: "Ethan Brooks" }).locator("td").last()).toHaveText("已发现");
+});
+test("批量加入活动：跳过其他 ASIN，不改变阶段", async ({ page: p }) => {
+  await p.getByLabel("选择 Ethan Brooks").check();
+  await p.getByLabel("选择 Maya Chen").check();
+  await btn(p, "加入活动").click();
+  await p.getByLabel("推广活动", { exact: true }).selectOption("冬季工具测评");
+  await expect(p.locator(".bulkplan")).toContainText("将加入 1 人");
+  await expect(p.locator(".bulkplan")).toContainText("关联其他 ASIN 1 人");
+  await btn(p, "确认加入").click();
+  await expect(p.getByText(/已加入「冬季工具测评」 1 人，跳过 1 人/)).toBeVisible();
+  const stageOf = (name) =>
+    p.locator("tbody tr").filter({ hasText: name }).locator("td").last();
+  await expect(stageOf("Ethan Brooks")).toHaveText("已发现");
+  await p.locator("tbody tr").filter({ hasText: "Maya Chen" }).locator(".person").click();
+  await btn(p, "协作").click();
+  await expect(p.getByText("尚未加入活动")).toBeVisible();
+  await close(p);
+  await profile(p);
+  await expect(p.getByText(/冬季工具测评 ·/)).toBeVisible();
+});
 test("跨页面保留发现筛选与看板筛选，看板阶段选择器可用", async ({ page: p }) => {
   await p.getByLabel("搜索创作者").fill("ethan");
   await btn(p, "合作管线").click();
@@ -147,9 +180,19 @@ test("预算、备注与日期：取消离开、确认丢弃、保存与再次�
   await profile(p);
   await expect(note).toHaveValue("");
   await expect(due).toHaveValue("2026-11-17");
-  await budget.fill("1e999");
+  for (const bad of ["1e999", "1e3", "1.005"]) {
+    await budget.fill(bad);
+    await btn(p, "保存合作资料").click();
+    await expect(p.locator("p[role=alert]")).toContainText("保存失败：预算格式无效");
+  }
+  await budget.fill("10000000000");
   await btn(p, "保存合作资料").click();
-  await expect(p.getByText("保存失败：预算必须是非负有限数值")).toBeVisible();
+  await expect(p.locator("p[role=alert]")).toContainText("预算超过上限 9,999,999,999.99");
+  await budget.fill("1,234.50");
+  await btn(p, "保存合作资料").click();
+  await close(p);
+  await profile(p);
+  await expect(budget).toHaveValue("1234.5");
   await budget.fill("");
   await note.fill("已复核");
   await btn(p, "保存合作资料").click();

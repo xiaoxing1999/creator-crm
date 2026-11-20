@@ -4,7 +4,21 @@
 - 范围：仅前端原型。全部为虚构数据；未接生产数据库、未接真实达人 API、未改 LibreChat。
 - 旧业务代码（`app/api/*`、`scripts/*.ts` 中的 Neon/抓取脚本）未改动，Hub 入口与之隔离。
 
-## 本轮改动清单
+## 564b96b 审核后 P0 修复（分支 `fix/hub-564b96b-p0-seal`）
+
+| 文件 | 改动 |
+| --- | --- |
+| `lib/hub.ts` | 新增 `inProductScope` / `planBulk` / `applyBulk`：批量入围与批量加入活动共用同一 ASIN 范围判定，逐条返回跳过原因（`missing` / `other-asin` / `not-discovered` / `no-change`）。新增 `parseBudgetCents`：仅接受非负十进制与合法千分位、最多两位小数，拒绝科学计数、十六进制、前导零、全角数字等；上限 9,999,999,999.99，以整数分计算（< 2^53）。 |
+| `components/hub/discovery.tsx` | 选择以 ASIN/工作区/范围为键，A→B→A 不再复活旧选择；批量加入活动显示"将加入 / 跳过"计划并走 `applyBulk`，不改阶段与收藏。 |
+| `components/hub/hub.tsx` | `Discovery` 挂载键加入数据范围，切换后组件状态重置。 |
+| `components/hub/profile.tsx` | 预算错误以 `role="alert"` 显示具体原因（格式无效 / 超过上限）。 |
+| `public/hub/hub-cjk*.ttf` | 新增文案后用 `scripts/hub-font-subset.py` 重新生成（474 字）。 |
+| `tests/hub.test.mjs` | +3：严格预算格式与上限；批量加入活动范围与原因；两种批量操作范围判定一致。 |
+| `tests/hub.spec.mjs` | +2 场景（A→B→A、批量加入活动），预算场景扩充。 |
+
+验证（本轮）：`tsc --noEmit` 0 错误；`node --test --experimental-strip-types tests/hub.test.mjs tests/glyphs.test.mjs` 11 / 11 通过；Playwright 11 / 11 通过（见 `E2E-RESULTS.md`）。本轮未重跑生产构建与截图。
+
+## 上一轮改动清单（a532e4d → 564b96b）
 
 | 文件 | 改动 |
 | --- | --- |
@@ -20,7 +34,7 @@
 
 收藏（`saved`）与合作阶段（`stage`）在数据与界面上互相独立，单元测试和 E2E 都有断言。
 
-## 验证结果（日志见 `TEST-LOGS/`）
+## 上一轮验证结果（564b96b 时点；日志见 `TEST-LOGS/`。注：当时 E2E-RESULTS.md 写 7 passed 与此处 9/9 不一致，已在本轮以 11/11 实测结果统一）
 
 | 检查 | 结果 |
 | --- | --- |
